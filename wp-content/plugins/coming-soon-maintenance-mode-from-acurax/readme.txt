@@ -1,10 +1,10 @@
 ﻿=== Under Construction / Maintenance Mode from Acurax ===
-Contributors: Acurax 
+Contributors: Acurax, comingsoonsupport
 Donate link: http://www.acurax.com/
-
 Tags: under construction,coming soon,under maintenance,maintenance mode,site offline,work in progress,website launch,launching page
 Requires at least: 2.8
-Tested up to: 4.7.3
+Requires PHP: 5.3
+Tested up to: 4.9.7
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -13,6 +13,8 @@ The easiest and feature-rich plugin to show under construction, coming soon, mai
 == Description ==
 
 This [Under Construction or Maintenance Mode](http://www.acurax.com/products/under-construction-maintenance-mode-wordpress-plugin/ "Under Construction or Maintenance Mode") Plugin is a simple and easy to configure Coming Soon Landing Page plugin with the best available features and customizable options.
+
+	Check Screenshots to See How Your Coming Soon Page Looks In Multiple Devices
 
 Demo/Live Preview : [Template 1](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=1 "Template 1") | [Template 2](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=2 "Template 2") | [Template 3](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=3 "Template 3") | [Template 4](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=4 "Template 4") | [Template 5](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=5 "Template 5") | [Custom HTML](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=0 "Custom HTML")
 
@@ -34,10 +36,18 @@ Feature Highlights
 	
 	★ SEO Configuration.
 	
+	★ GDPR and Privacy Policy Options.
+	
 	★ Advanced Access/Restriction Settings.
 	
 	★ Custom HTML Page Support
 
+
+GDPR compliance
+
+	This plugin is completely compliant with GDPR Policies,
+	Check Misc Page under our plugin settings menu for more info.
+	
 
 **Features in Detail**
 
@@ -167,25 +177,60 @@ Yes, From Version 2.5.1, you have the option in Misc page to enable/disable send
 
 == Screenshots ==
 
-1. General Settings Page
-2. Template 1 Preview - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=1 "Template 1 Live Preview")
-3. Template 1 Customization Options
-4. Template 2 Preview - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=2 "Template 2 Live Preview")
-5. Template 2 Customization Options
-6. Template 3 Preview - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=3 "Template 3 Live Preview")
-7. Template 3 Customization Options
-8. Template 4 Preview - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=4 "Template 4 Live Preview")
-9. Template 4 Customization Options
-10. Template 5 Preview - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=5 "Template 5 Live Preview")
-11. Template 5 Customization Options
-12. Template Custom HTML Options
-13. Maintenance Mode Subscribers List
-14. This is how Template A From Service Theme Pack 1 Premium Addon Looks Like - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=6 "Service Theme Pack 1 - Template A Live Preview")
-15. This is how Template B From Service Theme Pack 1 Premium Addon Looks Like - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=7 "Service Theme Pack 1 - Template B Live Preview")
-16. This is how Template C From Service Theme Pack 1 Premium Addon Looks Like - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=8 "Service Theme Pack 1 - Template C Live Preview")
-17. This is how Template D From Service Theme Pack 1 Premium Addon Looks Like - [Click Here for Live Preview](http://www.acurax.com/construction-maintenance-mode-acurax-demo.php?acx_csma_preview=9 "Service Theme Pack 1 - Template D Live Preview")
+1. Under Construction Page Theme 1 Preview on Multiple Devices
+2. Under Construction Page Theme 1 Preview on Desktop
+3. Under Construction Page Theme 1 Preview on Tablets
+4. Under Construction Page Theme 1 Preview on Mobile Devices
+5. Coming Soon Page Theme 2 Preview on Multiple Devices
+6. Coming Soon Page Theme 2 Preview on Desktop
+7. Coming Soon Page Theme 2 Preview on Tablets
+8. Coming Soon Page Theme 2 Preview on Mobile Devices
+9. Scheduled Maintenance Page Theme 3 Preview on Multiple Devices
+10. Scheduled Maintenance Page Theme 3 Preview on Desktop
+11. Scheduled Maintenance Page Theme 3 Preview on Tablets
+12. Scheduled Maintenance Page Theme 3 Preview on Mobile Devices
+13. Under Construction Page Theme 4 Preview on Multiple Devices
+14. Under Construction Page Theme 4 Preview on Desktop
+15. Under Construction Page Theme 4 Preview on Tablets
+16. Under Construction Page Theme 4 Preview on Mobile Devices
+17. Coming Soon Page Theme 5 Preview on Multiple Devices
+18. Coming Soon Page Theme 5 Preview on Desktop
+19. Coming Soon Page Theme 5 Preview on Tablets
+20. Coming Soon Page Theme 5 Preview on Mobile Devices
+21. This is how Template A From Service Theme Pack 1 Premium Addon Looks Like
+22. This is how Template B From Service Theme Pack 1 Premium Addon Looks Like
+23. This is how Template C From Service Theme Pack 1 Premium Addon Looks Like
+24. This is how Template D From Service Theme Pack 1 Premium Addon Looks Like
+
 
 == Upgrade Notice ==
+
+= 2.5.8 =
+Fix - Security Improvements
+Fix - Perfomance Improvements
+Fix - User Role Issue
+Added - GDPR Compliance
+Added - GDPR Compliance Privacy Options
+
+
+= 2.5.7 =
+Fix - Security Improvements
+Fix - Perfomance Improvements
+
+= 2.5.6 =
+Fix - Code Improvements
+Fix - URL Break Issues
+Fix - Perfomance Improvements
+
+= 2.5.5 =
+Fix - Code Improvements
+Fix - Addon Support Issue
+Fix - Perfomance Improvements
+
+= 2.5.4 =
+Fix - Code Improvements
+Fix - Several Bug Fixes
+Fix - Role issue reported by handjes
 
 = 2.5.3 =
 Fix - Security Fixes
@@ -266,6 +311,32 @@ Compatibility Fixes
 Stable Release
 
 == Changelog ==
+
+= 2.5.8 =
+Fix - Security Improvements
+Fix - Perfomance Improvements
+Fix - User Role Issue
+Added - GDPR Compliance
+Added - GDPR Compliance Privacy Options
+
+= 2.5.7 =
+Fix - Security Improvements
+Fix - Perfomance Improvements
+
+= 2.5.6 =
+Fix - Code Improvements
+Fix - URL Break Issues
+Fix - Perfomance Improvements
+
+= 2.5.5 =
+Fix - Code Improvements
+Fix - Addon Support Issue
+Fix - Perfomance Improvements
+
+= 2.5.4 =
+Fix - Code Improvements
+Fix - Several Bug Fixes
+Fix - Role issue reported by handjes
 
 = 2.5.3 =
 Fix - Security Fixes

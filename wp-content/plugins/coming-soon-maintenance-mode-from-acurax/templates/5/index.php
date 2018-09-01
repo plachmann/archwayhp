@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 $acx_csma_template_id = 5;
 do_action('acx_csma_above_template_html',$acx_csma_template_id);
 $acx_csma_meta_title =get_option('acx_csma_meta_title');
@@ -6,6 +7,7 @@ $acx_csma_meta_description=get_option('acx_csma_meta_description');
 $acx_csma_meta_keywords=get_option('acx_csma_meta_keywords');
 $favicon_attach_id = get_option('acx_csma_favicon');
 $acx_csma_favicon = $favicon_attach_id;
+
 if(is_numeric($favicon_attach_id))
 {
 	$fav_icon_attachment_url = parse_url( wp_get_attachment_url($favicon_attach_id) );
@@ -15,6 +17,7 @@ $acx_csma_start_date_time=get_option('acx_csma_start_date_time');
 $acx_csma_date_time=get_option('acx_csma_date_time');
 $acx_csma_appearence_array_5=acx_csma_get_db_array_value(); 
 	$acx_csma_timestamp=current_time('timestamp');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,6 +46,10 @@ if($acx_csma_meta_keywords!="")
 ?>
 <style>
 <?php echo $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_custom_css_temp5']; ?>
+.acx_csma_info_lb:hover
+{
+	color:<?php echo $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdpr_hovercolor5']; ?> !important;
+}
 </style>
 <link href="<?php echo plugins_url('style.css', __FILE__); ?>" rel="stylesheet" type="text/css" />
 <link rel="icon" href="<?php echo esc_url($acx_csma_favicon); ?>"  type="image/png">
@@ -69,6 +76,10 @@ else
 {
 	$new_class="";
 }
+$acx_csma_form_text = get_option('acx_csma_form_text');
+$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+$acx_csma_privacy_policy_title = get_option('acx_csma_privacy_policy_title');
+$acx_csma_privacy_policy_desc = get_option('acx_csma_privacy_policy_desc');
 ?>
 	<div class="wrapper <?php echo $new_class; ?>"> 
 		<div class="canvas1000"> 
@@ -238,23 +249,91 @@ else
 					<div id="acx_csma_success"  name="acx_csma_success" style="display:none;" ><?php echo $acx_csma_subscribe_success5; ?></div>
 					<div id="acx_csma_invalid" name="acx_csma_invalid" style="display:none;" ><?php echo $acx_csma_subscribe_invalid5; ?></div>
 					<div id="acx_csma_error"  style="display:none;"></div>
+					<div class="acx_subsc_form_cvr">
 					<?php
 					if($acx_csma_show_subscription_name5 == 1)
 					{
 					?>
+					<div class="acx_csma_email_cvr1">
 					<input type="text" id="acx_csma_name_hidden" name="acx_csma_name_hidden" value="" placeholder="<?php echo acx_csma_option_text_after_save_hook_fn($acx_s_name_singular); ?>"/>
 					<input type="hidden" id="acx_csma_email" name="email" placeholder="<?php echo acx_csma_option_text_after_save_hook_fn($acx_s_email_singular); ?>" > 
+					<div class="acx_csma_privacy_cvr" style="display:none;">
+					<?php 
+					if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text !="")
+					{
+						?>
+						<span class="acx_csma_gdpr_notice" style='color:<?php  echo $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdprcolor5']; ?>;'>
+						<input type="checkbox" name="acx_csma_gdpr_accept" id="acx_csma_gdpr_accept" value="yes">
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							<a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php echo  $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdprcolor5'];?>;'>
+							<?php
+						}
+						?>
+						
+						<?php echo $acx_csma_form_text;?>
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							</a>
+							<?php
+							
+						}
+						?>
+						</span>
+						<?php
+					}
+					?>
+					</div>
+					</div>
 					<input type="button" value="<?php echo acx_csma_option_text_after_save_hook_fn($acx_next_singular); ?>" id="acx_csma_submit" onclick="acx_csma_validate_email();" class="submit">
 					<?php
 					}
 					else if($acx_csma_show_subscription_name5 == 0){ ?>
-					
+					<div class="acx_csma_email_cvr1">
 					<input type="text" id="acx_csma_email" name="email" placeholder="<?php echo acx_csma_option_text_after_save_hook_fn($acx_s_email_singular); ?>" > 
+					
+					<div class="acx_csma_privacy_cvr" style="display:none;">
+					<?php 
+					if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text !="")
+					{
+						?>
+						<span class="acx_csma_gdpr_notice" style='color:<?php  echo $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdprcolor5']; ?>;'>
+						<input type="checkbox" name="acx_csma_gdpr_accept" id="acx_csma_gdpr_accept" value="yes">
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							<a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php echo  $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdprcolor5'];?>;'>
+							<?php
+						}
+						?>
+						
+						<?php echo $acx_csma_form_text;?>
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							</a>
+							<?php
+							
+						}
+						?>
+						</span>
+						<?php
+					}
+					?>
+					</div>
+					</div>
 					<input type="button" value="<?php echo  acx_csma_option_text_after_save_hook_fn($acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_subscribe_btn_text5']); ?>" id="acx_csma_submit" onclick="acx_csma_validate_email();" class="submit">
 					<?php
 					}
 					
 					?>
+					</div>
 					</form>
 					<?php
 				}
@@ -295,7 +374,17 @@ else
 			</div><!-- footer -->
 		</div><!-- canvas1000 -->
 	</div><!-- wrapper -->
-	
+	<!--<div class="inline_block acx_footer_privacy">
+		<?php	
+		if($acx_csma_gdpr_status == "yes" && $acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+		{
+			?>
+		
+		<a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php  echo $acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_footer_gdprcolor5']; ?>'><?php echo $acx_csma_privacy_policy_title ;?></a>
+		<?php
+	}
+	?>
+		</div><!-- inline_block -->
 <script>
 jQuery(document).ready(function() {
   jQuery(window).keydown(function(event){
@@ -325,7 +414,13 @@ if($acx_csma_show_subscription5 == 1)
 	$acx_email_singular=$acx_email_exist_arr['singular'];
 	$acx_subs_next_arr=acx_csma_disp_var_to_show("next");
 	$acx_next_singular=$acx_subs_next_arr['singular'];
-?>
+if($acx_csma_show_subscription_name5 == 0 && $acx_csma_gdpr_status == "yes")
+	{?>
+jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+jQuery(".acx_csma_privacy_cvr").show();	
+<?php
+	}
+	?>
 var acx_csma_form_status=1;
 function acx_csma_validate_email()
 {
@@ -346,16 +441,30 @@ function acx_csma_validate_email()
 		jQuery("#acx_csma_invalid").show();
 		jQuery("#acx_csma_email").hide();
 		jQuery("#acx_csma_submit").hide();
+		jQuery(".acx_csma_privacy_cvr").hide();
 		setTimeout(function()
 			{ 
 				jQuery("#acx_csma_invalid").hide();
 				jQuery("#acx_csma_email").show();
-				jQuery("#acx_csma_submit").show();				
+				jQuery("#acx_csma_submit").show();		
+				jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+				jQuery(".acx_csma_privacy_cvr").show();			
 			}, 3000);
 		return false;
 	}
-		else 
+	else 
 	{
+		<?php 
+	if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+	{
+		?>
+		if(jQuery("#acx_csma_gdpr_accept:checked").val() !== "yes")
+		{
+			return false;
+		}
+	<?php
+	}
+	?>
 	var acx_load="<div id='acx_csma_loading'><div class='load_1'></div></div>";
 	jQuery('body').append(acx_load);
 	
@@ -372,11 +481,14 @@ function acx_csma_validate_email()
 				jQuery("#acx_csma_success").show();
 				jQuery("#acx_csma_email").hide();
 				jQuery("#acx_csma_submit").hide();
+				jQuery(".acx_csma_privacy_cvr").hide();
 				setTimeout(function()
 				{ 
 					jQuery("#acx_csma_success").hide(); 
 					jQuery("#acx_csma_email").show();
 					jQuery("#acx_csma_submit").show();
+					jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+					jQuery(".acx_csma_privacy_cvr").show();
 			
 				}, 3000);
 			}  
@@ -385,6 +497,7 @@ function acx_csma_validate_email()
 				jQuery("#acx_csma_email").hide();
 				jQuery("#acx_csma_submit").hide();
 				jQuery("#acx_csma_error").show();
+				jQuery(".acx_csma_privacy_cvr").hide();
 				jQuery("#acx_csma_error").html("<?php echo $acx_email_singular; ?>");
 				setTimeout(function()
 				{ 
@@ -392,6 +505,8 @@ function acx_csma_validate_email()
 					jQuery("#acx_csma_error").hide(); 
 					jQuery("#acx_csma_email").show();
 					jQuery("#acx_csma_submit").show();
+					jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+					jQuery(".acx_csma_privacy_cvr").show();
 			
 				}, 3000);
 			
@@ -418,6 +533,9 @@ function acx_csma_validate_email()
 		jQuery("#acx_csma_email").show();
 		document.getElementById('acx_csma_submit').value="<?php echo $acx_csma_subscribe_btn_text5; ?>";
 		acx_csma_form_status=2;
+		
+			jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+			jQuery(".acx_csma_privacy_cvr").show();
 		return false;
 		}
 	}
@@ -437,12 +555,15 @@ function acx_csma_validate_email()
 			jQuery("#acx_csma_email").hide();
 			jQuery("#acx_csma_submit").hide();
 			jQuery("#acx_csma_invalid").show();
+			jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+			jQuery(".acx_csma_privacy_cvr").hide();	
 			setTimeout(function()
 				{ 
 					jQuery("#acx_csma_invalid").hide(); 
 					document.getElementById('acx_csma_name_hidden').type = 'text';
 					document.getElementById('acx_csma_submit').value="<?php echo $acx_next_singular; ?>";
 					jQuery("#acx_csma_submit").show();
+					jQuery(".acx_csma_privacy_cvr").hide();	
 					acx_csma_form_status=1;
 			
 				}, 3000);
@@ -452,6 +573,17 @@ function acx_csma_validate_email()
 		}
 		else 
 		{
+			<?php 
+			if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+			{
+				?>
+				if(jQuery("#acx_csma_gdpr_accept:checked").val() !== "yes")
+				{
+					return false;
+				}
+			<?php
+			}
+			?>
 			var acx_load="<div id='acx_csma_loading'><div class='load_1'></div></div>";
 			jQuery('body').append(acx_load);
 			
@@ -468,6 +600,7 @@ function acx_csma_validate_email()
 					document.getElementById('acx_csma_name_hidden').value="";
 					jQuery("#acx_csma_email").hide();
 					jQuery("#acx_csma_submit").hide();
+					jQuery(".acx_csma_privacy_cvr").hide();	
 					
 					jQuery("#acx_csma_success").show();
 					setTimeout(function()
@@ -486,6 +619,8 @@ function acx_csma_validate_email()
 					jQuery("#acx_csma_email").hide();
 					jQuery("#acx_csma_submit").hide();
 					jQuery("#acx_csma_error").show();
+				jQuery('#acx_csma_gdpr_accept').attr('checked', false);
+				jQuery(".acx_csma_privacy_cvr").show();	
 					jQuery("#acx_csma_error").html("<?php echo $acx_email_singular; ?>");
 					setTimeout(function()
 					{ 
@@ -494,6 +629,7 @@ function acx_csma_validate_email()
 						document.getElementById('acx_csma_name_hidden').type = 'text';
 						document.getElementById('acx_csma_submit').value="<?php echo $acx_next_singular; ?>";
 						jQuery("#acx_csma_submit").show();
+						jQuery(".acx_csma_privacy_cvr").hide();
 						acx_csma_form_status=1;
 				
 					}, 3000);
@@ -510,6 +646,7 @@ function acx_csma_validate_email()
 ?>
 <?php if($acx_csma_appearence_array_5[$acx_csma_template_id]['acx_csma_show_progressbar5']==1)
 {
+
 	if($acx_csma_timestamp < $acx_csma_date_time)
 	{?>
 	var current_spu = Math.floor(<?php echo current_time('timestamp'); ?>);		
@@ -615,6 +752,21 @@ function updateCounter()
 }
 	<?php }
 }?>
+jQuery( ".acx_csma_info_lb" ).click(function() {
+	var lb_title = jQuery(this).attr('lb_title');
+	var lb_content = jQuery(this).attr('lb_content');
+	var html= '<div id="acx_csma_c_icon_p_info_lb_h" style="display:none;"><div class="acx_csma_c_icon_p_info_c"><span class="acx_csma_c_icon_p_info_close" onclick="acx_csma_remove_info()"></span><h4>'+lb_title+'</h4><div class="acx_csma_c_icon_p_info_content">'+lb_content+'</div></div></div> <!-- acx_csma_c_icon_p_info_lb_h -->';
+	jQuery( "body" ).append(html)
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).fadeIn();
+});
+
+function acx_csma_remove_info()
+{
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).fadeOut()
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).remove();
+	var lb_title = "";
+	var lb_content = "";
+};
 </script>
 <?php do_action('acx_csma_bottom_inside_body_tag',$acx_csma_template_id); ?>
 	</body>

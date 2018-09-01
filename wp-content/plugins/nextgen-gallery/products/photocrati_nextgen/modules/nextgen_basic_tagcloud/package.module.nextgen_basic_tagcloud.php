@@ -89,12 +89,7 @@ class A_NextGen_Basic_Tagcloud_Form extends Mixin_Display_Type_Form
     }
     function enqueue_static_resources()
     {
-        $path = 'photocrati-nextgen_basic_tagcloud#settings.css';
-        wp_enqueue_style('nextgen_basic_tagcloud_settings-css', $this->get_static_url($path), FALSE, NGG_SCRIPT_VERSION);
-        $atp = C_Attach_Controller::get_instance();
-        if (!is_null($atp)) {
-            $atp->mark_script($path);
-        }
+        $this->object->enqueue_style('nextgen_basic_tagcloud_settings-css', $this->get_static_url('photocrati-nextgen_basic_tagcloud#settings.css'));
     }
     function _render_nextgen_basic_tagcloud_number_field($display_type)
     {
@@ -217,13 +212,7 @@ class C_Taxonomy_Controller extends C_MVC_Controller
         parent::define($context);
         $this->implement('I_Taxonomy_Controller');
     }
-    /**
-     * Returns the rendered HTML of a gallery based on the provided tag
-     *
-     * @param string $tag
-     * @return string
-     */
-    function index_action($tag)
+    function render_tag($tag)
     {
         $mapper = C_Display_Type_Mapper::get_instance();
         // Respect the global display type setting
@@ -284,7 +273,7 @@ class C_Taxonomy_Controller extends C_MVC_Controller
         $post->post_name = 'ngg_tag';
         $post->guid = get_bloginfo('wpurl') . '/' . 'ngg_tag';
         $post->post_title = $title;
-        $post->post_content = $this->index_action($tag);
+        $post->post_content = $this->render_tag($tag);
         $post->ID = FALSE;
         $post->post_type = 'page';
         $post->post_status = 'publish';

@@ -200,9 +200,8 @@ input
     border: 1px solid #727272;
     border-radius: 8px;
     color: #b3b3b3;
-    max-width: 370px;
     padding: 7px 10px;
-    width: 80%;
+    width: 100%;
 }
 .submit
 {
@@ -213,9 +212,9 @@ input
     font-size: 16px;
     font-weight: 100;
     margin: 0 0 0 10px;
-    max-width: 110px;
     text-align: center;
     transition: all 0.2s ease 0s;
+	width: 22%;
 }
 .submit:hover
 {
@@ -286,7 +285,11 @@ img
 {
 	width: 80%;
 }
-
+#acx_csma_c_icon_p_info_lb_h .acx_csma_c_icon_p_info_c
+{
+	margin: 7px auto !important;
+	width: 90% !important;
+}
 }
 @media screen and (max-width: 640px)
 {
@@ -317,4 +320,106 @@ ul#countdown li
   border-radius: 4px;
   max-width:400px;
   margin:0 auto;
+}
+#acx_csma_c_icon_p_info_lb_h
+{
+background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
+height: 100%;
+left: 0;
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 199999;
+}
+#acx_csma_c_icon_p_info_lb_h .acx_csma_c_icon_p_info_c
+{
+background: white none repeat scroll 0 0;
+border: 1px solid lightblue;
+border-radius: 2px;
+box-sizing: border-box;
+margin-left: 24%;
+margin-top: 7%;
+position: relative;
+width: 50%;
+}
+#acx_csma_c_icon_p_info_lb_h .acx_csma_c_icon_p_info_close
+{
+background: rgba(0, 0, 0, 0) url("./images/close.png") repeat scroll 0 0;
+cursor: pointer;
+height: 30px;
+position: absolute;
+right: 0;
+top: 0;
+width: 35px;
+}
+.csma_info_lb
+{
+cursor:pointer;
+}
+#acx_csma_c_icon_p_info_lb_h h4
+{
+background: #f0f0f0 none repeat scroll 0 0;
+box-sizing: border-box;
+font-family: arial;
+font-size: 16px;
+font-weight: normal;
+margin: 0;
+padding: 8px;
+text-align:left;
+color: #7a7a7a;
+text-transform:uppercase;
+}
+#acx_csma_c_icon_p_info_lb_h .acx_csma_c_icon_p_info_content
+{
+    background: white none repeat scroll 0 0;
+    box-sizing: border-box;
+    font-family: arial;
+    font-size: 16px;
+    line-height: 22px;
+    min-height: 100px;
+    padding: 15px;
+	color:#707171;
+}
+.acx_csma_c_icon_p_info_content a {
+    border-bottom: 1px dashed;
+    font-family: arial;
+    font-size: 15px;
+    font-style: normal;
+    text-decoration: none;
+}
+#acx_csma_gdpr_accept {
+	width: auto;
+	padding: 0 !important;
+	margin-right: 6px;
+}
+.acx_csma_privacy_cvr {
+    margin-top: 5px;
+}
+.acx_footer_privacy
+{
+	text-align:center;
+}
+.acx_csma_info_lb {
+	width: 37%;
+	cursor: pointer;
+}
+.acx_csma_email_cvr1 {
+	display: block;
+	float: left;
+	width: 67%;
+}
+.acx_subsc_form_cvr {
+	width: 80%;
+	margin: 0 auto;
+}
+@media screen and (max-width:548px)
+{
+	.acx_csma_email_cvr1
+	{
+		width:100%;
+	}
+	.submit
+	{
+		width:65%;
+	}
 }

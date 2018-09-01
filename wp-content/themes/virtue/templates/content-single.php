@@ -91,7 +91,7 @@
                         ?>
                             <div class="imghoverclass postfeat post-single-img" itemscope itemtype="https://schema.org/ImageObject">
                                 <a href="<?php echo esc_url($image_src[0]); ?>" data-rel="lightbox" class="lightboxhover">
-                                    <img src="<?php echo esc_url($image[0]); ?>"  width="<?php echo esc_attr($image[1]); ?>" height="<?php echo esc_attr($image[2]); ?>" <?php echo kt_get_srcset_output($image[1], $image[2], $image[0], $image_id);?> itemprop="contentUrl" alt="<?php the_title(); ?>" />
+                                    <img src="<?php echo esc_url($image[0]); ?>"  width="<?php echo esc_attr($image[1]); ?>" height="<?php echo esc_attr($image[2]); ?>" <?php echo kt_get_srcset_output($image[1], $image[2], $image[0], $image_id);?> itemprop="contentUrl" alt="<?php the_title_attribute(); ?>" />
                                     <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                     <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                                     <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">
@@ -99,7 +99,16 @@
                             </div>
                         <?php
                     } 
-            }  ?>
+            } else {
+            	if(has_post_thumbnail()) {
+				    $image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full' ); 
+				    echo '<div class="meta_post_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">';
+				        echo '<meta itemprop="url" content="'.esc_url($image[0]).'">';
+				        echo '<meta itemprop="width" content="'.esc_attr($image[1]).'">';
+				        echo '<meta itemprop="height" content="'.esc_attr($image[2]).'">';
+				    echo '</div>';
+				}
+           	} ?>
 
                 <?php
                   /**
@@ -117,7 +126,7 @@
                     ?>
                 </header>
 
-                <div class="entry-content" itemprop="description articleBody">
+                <div class="entry-content" itemprop="articleBody">
                     <?php
                     do_action( 'kadence_single_post_content_before' );
                         

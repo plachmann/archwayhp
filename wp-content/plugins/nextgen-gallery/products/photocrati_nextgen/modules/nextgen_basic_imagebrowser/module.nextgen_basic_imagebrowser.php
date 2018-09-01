@@ -26,7 +26,7 @@ class M_NextGen_Basic_ImageBrowser extends C_Base_Module
 			'photocrati-nextgen_basic_imagebrowser',
 			'NextGEN Basic ImageBrowser',
 			'Provides the NextGEN Basic ImageBrowser Display Type',
-            '0.14',
+            '3.0.0',
             'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
             'Imagely',
             'https://www.imagely.com'
@@ -75,7 +75,7 @@ class M_NextGen_Basic_ImageBrowser extends C_Base_Module
             );
         }
 
-		if (apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id))
+		if (!is_admin() && apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id))
 		{
             // Add rendering logic
             $this->get_registry()->add_adapter(

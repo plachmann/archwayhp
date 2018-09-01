@@ -3828,9 +3828,9 @@ function acx_csma_purachase_licence_form()
 	<table class="wp-list-table widefat fixed striped">
 		<tr>
 			<th class="manage-column"><?php _e('Plugin Name','coming-soon-maintenance-mode-from-acurax');?></th>
-			<th class="manage-column"><?php _e('Licence Code','coming-soon-maintenance-mode-from-acurax');?></th>
+			<th class="manage-column"><?php _e('License Code','coming-soon-maintenance-mode-from-acurax');?></th>
 			<th class="manage-column"><?php _e('Version','coming-soon-maintenance-mode-from-acurax');?></th>
-			<th class="manage-column"><?php _e('Licence Status','coming-soon-maintenance-mode-from-acurax');?></th>
+			<th class="manage-column"><?php _e('License Status','coming-soon-maintenance-mode-from-acurax');?></th>
 			<th class="manage-column"><?php _e('Plugin Status','coming-soon-maintenance-mode-from-acurax');?></th>
 			<th class="manage-column"><?php _e('Action','coming-soon-maintenance-mode-from-acurax');?></th>
 		</tr>
@@ -3839,7 +3839,7 @@ function acx_csma_purachase_licence_form()
 	if(empty($acx_csma_p_licence_array))
 	{
 		?>
-		<tr><td colspan="5"><?php _e('No Licence found','coming-soon-maintenance-mode-from-acurax');?></td></tr>
+		<tr><td colspan="5"><?php _e('No License found','coming-soon-maintenance-mode-from-acurax');?></td></tr>
 		<?php
 	}
 	foreach($acx_csma_p_licence_array as $key => $value)
@@ -4007,22 +4007,25 @@ function acx_csma_licnece_install_required_plugins() {
 }
 add_action( 'acx_csma_licence_tgmpa_register', 'acx_csma_licnece_install_required_plugins' );
 	// get plugin activation status
-function acx_csma_get_active_plugin_status($acx_slug)
+if(!function_exists('acx_csma_get_active_plugin_status'))
 {
-	$acx_return = false;
-	if($acx_slug != "")
+	function acx_csma_get_active_plugin_status($acx_slug)
 	{
-		$acx_csma_active_plugin_arr = get_option('active_plugins');
-		foreach($acx_csma_active_plugin_arr as $key => $value)
+		$acx_return = false;
+		if($acx_slug != "")
 		{
-			if(strpos($value,$acx_slug) !== false)
+			$acx_csma_active_plugin_arr = get_option('active_plugins');
+			foreach($acx_csma_active_plugin_arr as $key => $value)
 			{
-				$acx_return = true;
+				if(strpos($value,$acx_slug) !== false)
+				{
+					$acx_return = true;
+				}
 			}
+			
 		}
-		
+		return $acx_return;
 	}
-	return $acx_return;
 }
 function acx_csma_get_plugin_version_number($acx_slug)
 {
@@ -4066,7 +4069,7 @@ function acx_csma_show_purchased_licence_html()
 	<div class="acx_csma_add_p_licence_light_cls"></div><!-- acx_csma_add_p_licence_light_cls  -->
 	<div class="acx_csma_add_p_licence_light_content">
 		<span class="acx_csma_p_li_span">
-		<input type="text" id="acx_csma_purchased_licence" placeholder="<?php _e('Enter Your Licence Code','coming-soon-maintenance-mode-from-acurax');?>" value=""/>
+		<input type="text" id="acx_csma_purchased_licence" placeholder="<?php _e('Enter Your License Code','coming-soon-maintenance-mode-from-acurax');?>" value=""/>
 		<span class="acx_csma_pu_li_error"></span>
 		<a class="acx_csma_add_p_li_cls button button-primary"><?php _e('SUBMIT','coming-soon-maintenance-mode-from-acurax');?></a>
 		</span><!-- acx_csma_p_li_span -->
@@ -4090,7 +4093,7 @@ function acx_csma_show_purchased_licence_html()
 		var acx_csma_purchased_licence = jQuery("#acx_csma_purchased_licence").val();
 		if(acx_csma_purchased_licence == "")
 		{
-			jQuery(".acx_csma_pu_li_error").html('<?php _e('Invalid Licence Code','coming-soon-maintenance-mode-from-acurax');?>');
+			jQuery(".acx_csma_pu_li_error").html('<?php _e('Invalid License Code','coming-soon-maintenance-mode-from-acurax');?>');
 			return false;
 		}
 	
@@ -4139,7 +4142,7 @@ function acx_csma_show_purchased_licence_html()
 				jQuery("#acx_csmap_loading_1").remove();
 				if(theResponse == "success")
 				{
-					alert('<?php _e('Successfully deleted the licence !!','coming-soon-maintenance-mode-from-acurax');?>');
+					alert('<?php _e('Successfully deleted the license !!','coming-soon-maintenance-mode-from-acurax');?>');
 					var link = window.location.href;
 					if(link !== '')
 					{
@@ -4166,13 +4169,16 @@ function acx_csma_show_purchased_licence_html()
 				jQuery("#acx_csmap_loading_1").remove();
 				if(theResponse == "success")
 				{
-					alert('<?php _e('Successfully refreshed the licence !!','coming-soon-maintenance-mode-from-acurax');?>');
+					alert('<?php _e('Successfully refreshed the license !!','coming-soon-maintenance-mode-from-acurax');?>');
 					var link = window.location.href;
 					if(link !== '')
 					{
 						window.location=link;
 					}
 				} 
+				else{
+					alert('<?php _e('Failed to refresh the license !!','coming-soon-maintenance-mode-from-acurax');?>');
+				}
 			});
 		}
 	});	
@@ -4278,6 +4284,10 @@ function acx_csma_purchased_licence_add_callback()
 	{
 		$acx_csma_p_licence_array = unserialize($acx_csma_p_licence_array);
 	}
+	if($acx_csma_p_licence_array == "" || !is_array($acx_csma_p_licence_array))
+	{
+		$acx_csma_p_licence_array = array();
+	}
 	if($acx_csma_purchased_licence != "")
 	{
 		$licence_code_arr = explode('-',$acx_csma_purchased_licence);
@@ -4338,6 +4348,7 @@ function acx_csma_purchased_licence_add_callback()
 			}
 			if(!ISSET($response['response_status']) && !ISSET($response['status']))
 			{
+				
 				if(ISSET($acx_csmap_retry_array[$acx_csma_purchased_licence]['activation_licence_check']))
 				{
 					$acx_csmap_retry_array[$acx_csma_purchased_licence]['activation_licence_check'] = $acx_csmap_retry_array[$acx_csma_purchased_licence]['activation_licence_check'] + 1;
@@ -4366,7 +4377,6 @@ function acx_csma_purchased_licence_add_callback()
 					'download_dynamic_url' => $response['download_dynamic_url']
 					);
 					// update licence array
-					
 					$acx_csma_p_licence_array[$acx_csma_unique_id]['addon_name'] = $response['name'];
 					$acx_csma_p_licence_array[$acx_csma_unique_id]['version'] = $response['new_version'];
 					$acx_csma_p_licence_array[$acx_csma_unique_id]['licence_code'] = $acx_csma_purchased_licence;
@@ -4394,18 +4404,19 @@ function acx_csma_purchased_licence_add_callback()
 				}
 				else
 				{
-					echo __("Sorry, Your license code is invalid, Please contact support","coming-soon-maintenance-mode-from-acurax");
+					echo __("Sorry, Your license validation failed due to ".$response['response_status'].", Please contact support","coming-soon-maintenance-mode-from-acurax");
 				}
 			}
 		}
 		else
 		{
 			echo __("Sorry, Your license code is invalid, Please contact support","coming-soon-maintenance-mode-from-acurax");
+			
 		}
 	}
 	else
 	{
-		echo __("Invalid Licence Code","coming-soon-maintenance-mode-from-acurax");
+		echo __("License code is empty","coming-soon-maintenance-mode-from-acurax");
 	} 
 	die();
 }
@@ -4413,7 +4424,7 @@ add_action("wp_ajax_acx_csma_purchased_licence_add","acx_csma_purchased_licence_
 function acx_csma_licence_activation_api_request($args)
 {
 	// Send request									
-	$request = wp_remote_post( 'http://updates.acurax.com/licence_activation.php',array( 'body' => $args ) );
+	$request = wp_remote_post( 'https://updates.acurax.com/licence_activation.php',array( 'body' => $args ) );
 	if ( is_wp_error( $request ) || 200 != wp_remote_retrieve_response_code( $request ) )
 		return false;
 	$response = wp_remote_retrieve_body( $request ) ;

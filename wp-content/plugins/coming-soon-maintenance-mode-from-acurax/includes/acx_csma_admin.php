@@ -19,7 +19,7 @@ function setCookie (name, value){
 	document.cookie = name + "=" + escape(value) + "; expires=" + expires_date.toGMTString() + "; path=/;";
 }
 var acx_csma_cookie = getCookie("acx_csma_cookie");
-if(!acx_csma_cookie)
+if(!acx_csma_cookie || acx_csma_cookie == "null")
 {
 	setCookie("acx_csma_cookie",1);
 }
@@ -217,7 +217,20 @@ if($acx_csma_hidden == 'Y')
 	$acx_csma_footer_text_color1=$_POST['acx_csma_footer_text_color1'];
 	$acx_csma_footer_text_color1 = acx_csma_text_before_save_hook_fn('acx_csma_footer_text_color1',$acx_csma_footer_text_color1);
 	if($acx_csma_footer_text_color1==""){$acx_csma_footer_text_color1=$acx_csma_appearence_array['1']['acx_csma_footer_text_color1'];}
-	
+	$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+	if($acx_csma_gdpr_status == "yes")
+	{
+		$acx_csma_footer_gdprcolor1=$_POST['acx_csma_footer_gdprcolor1'];
+		$acx_csma_footer_gdprcolor1 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdprcolor1',$acx_csma_footer_gdprcolor1);
+		if($acx_csma_footer_gdprcolor1==""){$acx_csma_footer_gdprcolor1=$acx_csma_appearence_array['1']['acx_csma_footer_gdprcolor1'];}
+		$acx_csma_footer_gdpr_hovercolor1=$_POST['acx_csma_footer_gdpr_hovercolor1'];
+		$acx_csma_footer_gdpr_hovercolor1 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdpr_hovercolor1',$acx_csma_footer_gdpr_hovercolor1);
+		if($acx_csma_footer_gdpr_hovercolor1==""){$acx_csma_footer_gdpr_hovercolor1=$acx_csma_appearence_array['1']['acx_csma_footer_gdpr_hovercolor1'];}
+	}
+	else{
+		$acx_csma_footer_gdprcolor1="#ffffff";
+		$acx_csma_footer_gdpr_hovercolor1="#e3e3e3";
+	}
 	$acx_csma_custom_css_temp1=$_POST['acx_csma_custom_css_temp1'];
 	$acx_csma_custom_css_temp1 = acx_csma_custom_html_before_save_hook_fn('acx_csma_custom_css_temp1', $acx_csma_custom_css_temp1);
 	// **************************************template 2**************************************
@@ -340,6 +353,19 @@ if($acx_csma_hidden == 'Y')
 	$acx_csma_linkedin_link2=esc_url_raw($_POST['acx_csma_linkedin_link2']);
 	$acx_csma_custom_css_temp2=$_POST['acx_csma_custom_css_temp2'];
 	$acx_csma_custom_css_temp2 = acx_csma_custom_html_before_save_hook_fn('acx_csma_custom_css_temp2', $acx_csma_custom_css_temp2);
+	if($acx_csma_gdpr_status == "yes")
+	{
+	$acx_csma_footer_gdprcolor2=$_POST['acx_csma_footer_gdprcolor2'];
+	$acx_csma_footer_gdprcolor2 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdprcolor2',$acx_csma_footer_gdprcolor2);
+	if($acx_csma_footer_gdprcolor2==""){$acx_csma_footer_gdprcolor2=$acx_csma_appearence_array['2']['acx_csma_footer_gdprcolor2'];}
+	$acx_csma_footer_gdpr_hovercolor2=$_POST['acx_csma_footer_gdpr_hovercolor2'];
+	$acx_csma_footer_gdpr_hovercolor2 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdpr_hovercolor2',$acx_csma_footer_gdpr_hovercolor2);
+	if($acx_csma_footer_gdpr_hovercolor2==""){$acx_csma_footer_gdpr_hovercolor2=$acx_csma_appearence_array['2']['acx_csma_footer_gdpr_hovercolor2'];}
+	}
+	else{
+		$acx_csma_footer_gdprcolor2="#000000";
+		$acx_csma_footer_gdpr_hovercolor2="#8f8f8f";
+	}
 	//***********************************template 3*************************
 	if(ISSET($_POST['acx_csma_logo_choice3']))
 	{
@@ -470,6 +496,19 @@ if($acx_csma_hidden == 'Y')
 	$acx_csma_linkedin_link3=esc_url_raw($_POST['acx_csma_linkedin_link3']);
 	$acx_csma_custom_css_temp3=$_POST['acx_csma_custom_css_temp3'];
 	$acx_csma_custom_css_temp3 = acx_csma_custom_html_before_save_hook_fn('acx_csma_custom_css_temp3', $acx_csma_custom_css_temp3);
+	if($acx_csma_gdpr_status == "yes")
+	{
+	$acx_csma_footer_gdprcolor3=$_POST['acx_csma_footer_gdprcolor3'];
+	$acx_csma_footer_gdprcolor3 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdprcolor3',$acx_csma_footer_gdprcolor3);
+	if($acx_csma_footer_gdprcolor3==""){$acx_csma_footer_gdprcolor3=$acx_csma_appearence_array['3']['acx_csma_footer_gdprcolor3'];}
+	$acx_csma_footer_gdpr_hovercolor3=$_POST['acx_csma_footer_gdpr_hovercolor3'];
+	$acx_csma_footer_gdpr_hovercolor3 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdpr_hovercolor3',$acx_csma_footer_gdpr_hovercolor3);
+	if($acx_csma_footer_gdpr_hovercolor3==""){$acx_csma_footer_gdpr_hovercolor3=$acx_csma_appearence_array['3']['acx_csma_footer_gdpr_hovercolor3'];}
+	}
+	else{
+		$acx_csma_footer_gdprcolor3="#ffffff";
+		$acx_csma_footer_gdpr_hovercolor3="#fe7e01";
+	}
 	//********************************template 4***********************************
 	$acx_csma_background_image4=$_POST['acx_csma_background_image4'];
 	$acx_csma_background_image4 = acx_csma_text_before_save_hook_fn('acx_csma_background_image4',$acx_csma_background_image4);
@@ -560,6 +599,20 @@ if($acx_csma_hidden == 'Y')
 	$acx_csma_linkedin_link4=esc_url_raw($_POST['acx_csma_linkedin_link4']);
 	$acx_csma_custom_css_temp4=$_POST['acx_csma_custom_css_temp4'];
 	$acx_csma_custom_css_temp4 = acx_csma_custom_html_before_save_hook_fn('acx_csma_custom_css_temp4', $acx_csma_custom_css_temp4);
+	$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+	if($acx_csma_gdpr_status == "yes")
+	{
+		$acx_csma_footer_gdprcolor4=$_POST['acx_csma_footer_gdprcolor4'];
+		$acx_csma_footer_gdprcolor4 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdprcolor4',$acx_csma_footer_gdprcolor4);
+		if($acx_csma_footer_gdprcolor4==""){$acx_csma_footer_gdprcolor1=$acx_csma_appearence_array['4']['acx_csma_footer_gdprcolor4'];}
+		$acx_csma_footer_gdpr_hovercolor4=$_POST['acx_csma_footer_gdpr_hovercolor4'];
+		$acx_csma_footer_gdpr_hovercolor4 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdpr_hovercolor4',$acx_csma_footer_gdpr_hovercolor4);
+		if($acx_csma_footer_gdpr_hovercolor4==""){$acx_csma_footer_gdpr_hovercolor1=$acx_csma_appearence_array['4']['acx_csma_footer_gdpr_hovercolor4'];}
+	}
+	else{
+		$acx_csma_footer_gdprcolor4="#000000";
+		$acx_csma_footer_gdpr_hovercolor4="#adadad";
+	}
 	//********************************template5*********************************
 	$acx_csma_bgcolor5=$_POST['acx_csma_bgcolor5'];
 	$acx_csma_bgcolor5 = acx_csma_text_before_save_hook_fn('acx_csma_bgcolor5',$acx_csma_bgcolor5);if($acx_csma_bgcolor5==""){$acx_csma_bgcolor5=$acx_csma_appearence_array['5']['acx_csma_bgcolor5'];}
@@ -650,6 +703,20 @@ if($acx_csma_hidden == 'Y')
 	$acx_csma_linkedin_link5=esc_url_raw($_POST['acx_csma_linkedin_link5']);
 	$acx_csma_custom_css_temp5=$_POST['acx_csma_custom_css_temp5'];
 	$acx_csma_custom_css_temp5 = acx_csma_custom_html_before_save_hook_fn('acx_csma_custom_css_temp5', $acx_csma_custom_css_temp5);
+	if($acx_csma_gdpr_status == "yes")
+	{
+		$acx_csma_footer_gdprcolor5=$_POST['acx_csma_footer_gdprcolor5'];
+		$acx_csma_footer_gdprcolor5 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdprcolor5',$acx_csma_footer_gdprcolor5);
+		if($acx_csma_footer_gdprcolor5==""){$acx_csma_footer_gdprcolor5=$acx_csma_appearence_array['5']['acx_csma_footer_gdprcolor5'];}
+		$acx_csma_footer_gdpr_hovercolor5=$_POST['acx_csma_footer_gdpr_hovercolor5'];
+		$acx_csma_footer_gdpr_hovercolor5 = acx_csma_text_before_save_hook_fn('acx_csma_footer_gdpr_hovercolor5',$acx_csma_footer_gdpr_hovercolor5);
+		if($acx_csma_footer_gdpr_hovercolor5==""){$acx_csma_footer_gdpr_hovercolor5=$acx_csma_appearence_array['5']['acx_csma_footer_gdpr_hovercolor5'];}
+	}
+	else{
+		$acx_csma_footer_gdprcolor5="#ffffff";
+		$acx_csma_footer_gdpr_hovercolor5="#a19e99";
+	}
+	
 	
 	$acx_csma_template=$_POST['acx_csma_template'];
 	if($acx_csma_template==""){$acx_csma_template=1;}
@@ -711,7 +778,9 @@ if($acx_csma_hidden == 'Y')
 							'acx_csma_footer_bgcolor1'=>$acx_csma_footer_bgcolor1,
 							'acx_csma_footer_text1'=>$acx_csma_footer_text1,
 							'acx_csma_footer_text_color1'=>$acx_csma_footer_text_color1,
-							'acx_csma_custom_css_temp1'=>$acx_csma_custom_css_temp1
+							'acx_csma_custom_css_temp1'=>$acx_csma_custom_css_temp1,
+							'acx_csma_footer_gdprcolor1' => $acx_csma_footer_gdprcolor1,
+							'acx_csma_footer_gdpr_hovercolor1'=> $acx_csma_footer_gdpr_hovercolor1
 											);
 			}
 		acx_csma_update_array_value($acx_csma_appearence_array);
@@ -761,7 +830,9 @@ if($acx_csma_hidden == 'Y')
 							'acx_csma_fb_link2'=>$acx_csma_fb_link2,
 							'acx_csma_twitter_link2'=>$acx_csma_twitter_link2,
 							'acx_csma_linkedin_link2'=>$acx_csma_linkedin_link2,
-							'acx_csma_custom_css_temp2'=>$acx_csma_custom_css_temp2
+							'acx_csma_custom_css_temp2'=>$acx_csma_custom_css_temp2,
+							'acx_csma_footer_gdprcolor2' => $acx_csma_footer_gdprcolor2,
+							'acx_csma_footer_gdpr_hovercolor2'=> $acx_csma_footer_gdpr_hovercolor2
 							);
 			}
 		acx_csma_update_array_value($acx_csma_appearence_array);
@@ -815,7 +886,9 @@ if($acx_csma_hidden == 'Y')
 							'acx_csma_fb_link3'=>$acx_csma_fb_link3,
 							'acx_csma_twitter_link3'=>$acx_csma_twitter_link3,
 							'acx_csma_linkedin_link3'=>$acx_csma_linkedin_link3,
-							'acx_csma_custom_css_temp3'=>$acx_csma_custom_css_temp3
+							'acx_csma_custom_css_temp3'=>$acx_csma_custom_css_temp3,
+							'acx_csma_footer_gdprcolor3' => $acx_csma_footer_gdprcolor3,
+							'acx_csma_footer_gdpr_hovercolor3'=> $acx_csma_footer_gdpr_hovercolor3
 						);
 			}
 		acx_csma_update_array_value($acx_csma_appearence_array);
@@ -857,7 +930,9 @@ if($acx_csma_hidden == 'Y')
 							'acx_csma_fb_link4'=>$acx_csma_fb_link4,
 							'acx_csma_twitter_link4'=>$acx_csma_twitter_link4,
 							'acx_csma_linkedin_link4'=>$acx_csma_linkedin_link4,
-							'acx_csma_custom_css_temp4'=>$acx_csma_custom_css_temp4
+							'acx_csma_custom_css_temp4'=>$acx_csma_custom_css_temp4,
+							'acx_csma_footer_gdprcolor4' => $acx_csma_footer_gdprcolor4,
+							'acx_csma_footer_gdpr_hovercolor4'=> $acx_csma_footer_gdpr_hovercolor4
 							);
 			}
 		acx_csma_update_array_value($acx_csma_appearence_array);
@@ -900,7 +975,9 @@ if($acx_csma_hidden == 'Y')
 							'acx_csma_fb_link5'=>$acx_csma_fb_link5,
 							'acx_csma_twitter_link5'=>$acx_csma_twitter_link5,
 							'acx_csma_linkedin_link5'=>$acx_csma_linkedin_link5,
-							'acx_csma_custom_css_temp5'=>$acx_csma_custom_css_temp5
+							'acx_csma_custom_css_temp5'=>$acx_csma_custom_css_temp5,
+							'acx_csma_footer_gdprcolor5' => $acx_csma_footer_gdprcolor5,
+							'acx_csma_footer_gdpr_hovercolor5'=> $acx_csma_footer_gdpr_hovercolor5
 						);
 			}
 		acx_csma_update_array_value($acx_csma_appearence_array);
@@ -966,7 +1043,7 @@ else
 		{
 			$acx_csma_ip_list = unserialize($acx_csma_ip_list); 
 		}	 
-		if(!is_array($acx_csma_ip_list))
+		if($acx_csma_ip_list == "" || !is_array($acx_csma_ip_list))
 		{
 			$acx_csma_ip_list = array();
 		}
@@ -1095,7 +1172,16 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 				<tr><td><b><?php echo "<h4>" . __( 'Access Settings', 'coming-soon-maintenance-mode-from-acurax' ) . "</h4>"; ?></b></td></tr>
 				<tr><td><?php _e("Do not show maintenance page for the following IPs:","coming-soon-maintenance-mode-from-acurax"); ?></td></tr>
 				<tr>
-				<td><p><?php $acx_csma_ip_list=get_option('acx_csma_ip_list');if(is_serialized($acx_csma_ip_list)){$acx_csma_ip_list=unserialize($acx_csma_ip_list);}?>
+				<td><p><?php $acx_csma_ip_list=get_option('acx_csma_ip_list');
+				if(is_serialized($acx_csma_ip_list))
+				{
+					$acx_csma_ip_list = unserialize($acx_csma_ip_list);
+					if($acx_csma_ip_list == "" || !is_array($acx_csma_ip_list))
+					{
+						$acx_csma_ip_list = array();
+					}
+				}
+				?>
 				<select name="acx_csma_ip_list[]" id="acx_csma_ip_list1" multiple>
 				<?php foreach($acx_csma_ip_list as $key =>$value)
 				{?>
@@ -1120,14 +1206,18 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 				{
 					$acx_csma_restrict_role = unserialize($acx_csma_restrict_role); 
 				}
+				if($acx_csma_restrict_role == "" || !is_array($acx_csma_restrict_role))
+				{
+					$acx_csma_restrict_role = array();
+				}
 				// get all roles
 				global $wp_roles;
 				$roles = $wp_roles->get_names();
-				foreach($roles as $role) 
+				foreach($roles as $role_key => $role) 
 				{ 
-					if($role!="Administrator")
+					if($role_key!="administrator")
 					{?>
-						<tr><td><input type="checkbox" name="acx_csma_restrict_role[]" size="20" value="<?php echo $role; ?>"<?php if(is_array($acx_csma_restrict_role) && in_array($role,$acx_csma_restrict_role)){echo "checked='checked'"; }?>/><?php echo $role; ?></td><tr>
+						<tr><td><input type="checkbox" name="acx_csma_restrict_role[]" size="20" value="<?php echo $role_key; ?>"<?php if(is_array($acx_csma_restrict_role) && in_array($role_key,$acx_csma_restrict_role)){echo "checked='checked'"; }?>/><?php echo $role; ?></td><tr>
 <?php   			}
 				}?>
 			</table>
@@ -1183,6 +1273,9 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 </div> <!-- main -->
 		<?php
 		$acx_csma_appearence_array=acx_csma_get_db_array_value(); 
+	/* 	echo "<pre>";
+		print_r($acx_csma_appearence_array);
+		echo "<pre>"; */
 ?>
 		<div id="acx_csma_template_1" style="display:none;" class="acx_csma_template_option_holder">
 			<div id="acx_csma_1_p_q_and_a_h_main_holder">
@@ -1600,6 +1693,48 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 				</div> <!-- acx_csmap_q_and_a_h -->
 			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE ############################################-->
 			
+		<?php
+			$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+			if($acx_csma_gdpr_status == "yes")
+			{
+						?>
+			<!-- ################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
+			
+					<?php 
+				
+						$acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
+
+				<div id="acx_csmap_q_and_a_h" class="acx_csmap_q_and_a_h_common acx_csmap_q_and_a_h_<?php echo $acx_csmap_qa_id; ?>">
+					<span class="acx_csma_q" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);">
+					<?php _e("GDPR Settings","coming-soon-maintenance-mode-from-acurax"); ?>
+					</span>
+					<span class="acx_csma_toggle acx_csma_toggle_<?php echo $acx_csmap_qa_id; ?> plus" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);"></span>
+					<div id="acx_csmap_q_and_a" class="acx_csmap_q_and_a_common acx_csmap_q_and_a_<?php echo $acx_csmap_qa_id; ?>" style="display:none;">
+						<div class="acx_csmap_q_and_a_inside">
+							<label>
+							<?php _e("Notice Text Color:","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#ffffff','acx_csma_footer_gdprcolor1');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdprcolor1"  id="acx_csma_footer_gdprcolor1" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['1']['acx_csma_footer_gdprcolor1']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdprcolor1_div"></div>
+							</div> <!-- acx_qa_field -->
+							<label>
+							<?php _e("Notice Text Hover Color (If Privacy Policy Link Is Present):","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#ff7800','acx_csma_footer_gdpr_hovercolor1');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdpr_hovercolor1"  id="acx_csma_footer_gdpr_hovercolor1" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['1']['acx_csma_footer_gdpr_hovercolor1']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdpr_hovercolor1_div"></div>
+							</div> <!-- acx_qa_field -->
+							
+						</div> <!-- acx_csmap_q_and_a_inside --> 
+					</div> <!-- acx_csmap_q_and_a --> 
+				</div> <!-- acx_csmap_q_and_a_h -->
+				
+			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE ############################################-->
+		<?php
+					}
+					?>
+			
 			<!--################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
 					<?php $acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
 
@@ -2012,6 +2147,47 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 					</div> <!-- acx_csmap_q_and_a -->
 				</div> <!-- acx_csmap_q_and_a_h -->
 			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################-->
+			<?php 
+			$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+			if($acx_csma_gdpr_status == "yes")
+			{
+						?>
+				<!-- ################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
+			
+					<?php 
+					
+						$acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
+
+				<div id="acx_csmap_q_and_a_h" class="acx_csmap_q_and_a_h_common acx_csmap_q_and_a_h_<?php echo $acx_csmap_qa_id; ?>">
+					<span class="acx_csma_q" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);">
+					<?php _e("GDPR Settings","coming-soon-maintenance-mode-from-acurax"); ?>
+					</span>
+					<span class="acx_csma_toggle acx_csma_toggle_<?php echo $acx_csmap_qa_id; ?> plus" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);"></span>
+					<div id="acx_csmap_q_and_a" class="acx_csmap_q_and_a_common acx_csmap_q_and_a_<?php echo $acx_csmap_qa_id; ?>" style="display:none;">
+						<div class="acx_csmap_q_and_a_inside">
+							<label>
+							<?php _e("Notice Text Color:","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#000000','acx_csma_footer_gdprcolor2');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdprcolor2"  id="acx_csma_footer_gdprcolor2" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['2']['acx_csma_footer_gdprcolor2']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdprcolor2_div"></div>
+							</div> <!-- acx_qa_field -->
+							<label>
+							<?php _e("Notice Text Hover Color (If Privacy Policy Link Is Present):","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#8f8f8f','acx_csma_footer_gdpr_hovercolor2');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdpr_hovercolor2"  id="acx_csma_footer_gdpr_hovercolor2" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['2']['acx_csma_footer_gdpr_hovercolor2']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdpr_hovercolor2_div"></div>
+							</div> <!-- acx_qa_field -->
+							
+						</div> <!-- acx_csmap_q_and_a_inside --> 
+					</div> <!-- acx_csmap_q_and_a --> 
+				</div> <!-- acx_csmap_q_and_a_h -->
+				
+			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE ############################################-->
+		<?php
+			}
+			?>
 			<!--################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
 					<?php $acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
 
@@ -2498,6 +2674,46 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 					</div> <!-- acx_csmap_q_and_a -->
 				</div> <!-- acx_csmap_q_and_a_h -->
 			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################-->
+			<?php
+			$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+			if($acx_csma_gdpr_status == "yes")
+			{
+			?>
+			<!-- ################################# QUESTION AND ANSWER STARTS ENDS HERE #############################################-->
+					<?php 
+					
+					
+					$acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
+
+				<div id="acx_csmap_q_and_a_h" class="acx_csmap_q_and_a_h_common acx_csmap_q_and_a_h_<?php echo $acx_csmap_qa_id; ?>">
+					<span class="acx_csma_q" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);">
+					<?php _e("GDPR Settings","coming-soon-maintenance-mode-from-acurax"); ?>
+					</span>
+					<span class="acx_csma_toggle acx_csma_toggle_<?php echo $acx_csmap_qa_id; ?> plus" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);"></span>
+					<div id="acx_csmap_q_and_a" class="acx_csmap_q_and_a_common acx_csmap_q_and_a_<?php echo $acx_csmap_qa_id; ?>" style="display:none;">
+						<div class="acx_csmap_q_and_a_inside">
+							<label>
+							<?php _e("Notice Text Color:","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#ffffff','acx_csma_footer_gdprcolor3');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdprcolor3"  id="acx_csma_footer_gdprcolor3" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['3']['acx_csma_footer_gdprcolor3']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdprcolor3_div"></div>
+							</div> <!-- acx_qa_field -->
+							<label>
+							<?php _e("Notice Text Hover Color (If Privacy Policy Link Is Present):","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#fe7e01','acx_csma_footer_gdpr_hovercolor3');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdpr_hovercolor3"  id="acx_csma_footer_gdpr_hovercolor3" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['3']['acx_csma_footer_gdpr_hovercolor3']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdpr_hovercolor3_div"></div>
+							</div> <!-- acx_qa_field -->
+							
+						</div> <!-- acx_csmap_q_and_a_inside --> 
+					</div> <!-- acx_csmap_q_and_a --> 
+				</div> <!-- acx_csmap_q_and_a_h -->
+			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################-->
+			<?php 
+			}
+			?>
 			<!--################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
 					<?php $acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
 
@@ -2871,7 +3087,46 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 					</div> <!-- acx_csmap_q_and_a -->
 				</div> <!-- acx_csmap_q_and_a_h -->
 			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################-->
-			
+			<?php 
+					
+					$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+					if($acx_csma_gdpr_status == "yes")
+					{
+						?>
+					<!-- ################################# QUESTION AND ANSWER STARTS ENDS HERE #############################################-->
+					
+					<?php
+					$acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
+
+				<div id="acx_csmap_q_and_a_h" class="acx_csmap_q_and_a_h_common acx_csmap_q_and_a_h_<?php echo $acx_csmap_qa_id; ?>">
+					<span class="acx_csma_q" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);">
+					<?php _e("GDPR Settings","coming-soon-maintenance-mode-from-acurax"); ?>
+					</span>
+					<span class="acx_csma_toggle acx_csma_toggle_<?php echo $acx_csmap_qa_id; ?> plus" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);"></span>
+					<div id="acx_csmap_q_and_a" class="acx_csmap_q_and_a_common acx_csmap_q_and_a_<?php echo $acx_csmap_qa_id; ?>" style="display:none;">
+						<div class="acx_csmap_q_and_a_inside">
+							<label>
+							<?php _e("Notice Text Color:","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#000000','acx_csma_footer_gdprcolor4');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdprcolor4"  id="acx_csma_footer_gdprcolor4" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['4']['acx_csma_footer_gdprcolor4']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdprcolor4_div"></div>
+							</div> <!-- acx_qa_field -->
+							<label>
+							<?php _e("Notice Text Hover Color (If Privacy Policy Link Is Present):","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#adadad','acx_csma_footer_gdpr_hovercolor4');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdpr_hovercolor4"  id="acx_csma_footer_gdpr_hovercolor4" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['4']['acx_csma_footer_gdpr_hovercolor4']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdpr_hovercolor4_div"></div>
+							</div> <!-- acx_qa_field -->
+							
+						</div> <!-- acx_csmap_q_and_a_inside --> 
+					</div> <!-- acx_csmap_q_and_a --> 
+				</div> <!-- acx_csmap_q_and_a_h -->
+				
+			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################--><?php 
+					}
+					?>
 			<!--################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
 					<?php $acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
 
@@ -3245,6 +3500,46 @@ acx_csma_hook_function('acx_csma_hook_mainoptions_outside_if_submit');
 					</div> <!-- acx_csmap_q_and_a -->
 				</div> <!-- acx_csmap_q_and_a_h -->
 			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################-->
+				<?php 
+					
+					$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+					if($acx_csma_gdpr_status == "yes")
+					{
+						?>
+					<!-- ################################# QUESTION AND ANSWER STARTS ENDS HERE #############################################-->
+					
+					<?php
+					$acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
+
+				<div id="acx_csmap_q_and_a_h" class="acx_csmap_q_and_a_h_common acx_csmap_q_and_a_h_<?php echo $acx_csmap_qa_id; ?>">
+					<span class="acx_csma_q" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);">
+					<?php _e("GDPR Settings","coming-soon-maintenance-mode-from-acurax"); ?>
+					</span>
+					<span class="acx_csma_toggle acx_csma_toggle_<?php echo $acx_csmap_qa_id; ?> plus" onclick="acx_csmap_easy_qa_toggle(<?php echo $acx_csmap_qa_id; ?>);"></span>
+					<div id="acx_csmap_q_and_a" class="acx_csmap_q_and_a_common acx_csmap_q_and_a_<?php echo $acx_csmap_qa_id; ?>" style="display:none;">
+						<div class="acx_csmap_q_and_a_inside">
+							<label>
+							<?php _e("Notice Text Color:","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#ffffff','acx_csma_footer_gdprcolor5');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdprcolor5"  id="acx_csma_footer_gdprcolor5" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['5']['acx_csma_footer_gdprcolor5']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdprcolor5_div"></div>
+							</div> <!-- acx_qa_field -->
+							<label>
+							<?php _e("Notice Text Hover Color (If Privacy Policy Link Is Present):","coming-soon-maintenance-mode-from-acurax"); ?><a onclick="acx_csma_restore_default('','#a19e99','acx_csma_footer_gdpr_hovercolor5');" class="acx_csmap_button_reset">[<?php _e("Reset To Default","coming-soon-maintenance-mode-from-acurax"); ?>]</a>
+							</label>
+							<div class="acx_qa_field">
+							<input type="text" name="acx_csma_footer_gdpr_hovercolor5"  id="acx_csma_footer_gdpr_hovercolor5" onblur="acx_csma_validate(this.value);" value="<?php echo $acx_csma_appearence_array['5']['acx_csma_footer_gdpr_hovercolor5']; ?>" size="20"/>
+							<div style="position: absolute;" id="acx_csma_footer_gdpr_hovercolor5_div"></div>
+							</div> <!-- acx_qa_field -->
+							
+						</div> <!-- acx_csmap_q_and_a_inside --> 
+					</div> <!-- acx_csmap_q_and_a --> 
+				</div> <!-- acx_csmap_q_and_a_h -->
+				
+			<!-- ################################# QUESTION AND ANSWER SET ENDS HERE #############################################--><?php 
+					}
+					?>
 <!--################################ QUESTION AND ANSWER SET STARTS HERE ############################################ -->
 					<?php $acx_csmap_qa_id = $acx_csmap_qa_id+1; ?>
 
@@ -3488,6 +3783,11 @@ function acx_csma_restore_default(img_id,default_value,text_id,set_bg)
 jQuery(document).ready(function() 
 {
 	var acx_csma_cookie = getCookie("acx_csma_cookie");		
+	if(!acx_csma_cookie || acx_csma_cookie == "null")
+	{
+		setCookie("acx_csma_cookie",1);
+	}
+	acx_csma_cookie = getCookie("acx_csma_cookie");	
 	acx_csma_show_div(acx_csma_cookie);
 	var acx_csma_temp_cookie = getCookie("acx_csma_temp_cookie");
 	acx_csma_rdbtn_show_div(acx_csma_temp_cookie);

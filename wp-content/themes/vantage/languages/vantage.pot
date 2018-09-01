@@ -1,4 +1,4 @@
-# Copyright (C) 2016 vantage
+# Copyright (C) 2017 vantage
 # This file is distributed under the same license as the vantage package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: SiteOrigin <support@siteorigin.com>\n"
 "Language-Team: SiteOrigin <support@siteorigin.com>\n"
 "X-Poedit-Basepath: ..\n"
@@ -128,11 +128,7 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: content-gallery.php:86, content-image.php:77, content-single.php:59, content-video.php:78
-msgid "Add author biographical info."
-msgstr ""
-
-#: content.php:47, inc/settings.php:375, inc/template-tags.php:514, loops/loop-circleicon.php:22, loops/loop-grid.php:24
+#: content.php:47, inc/settings.php:375, inc/template-tags.php:549, loops/loop-circleicon.php:22, loops/loop-grid.php:24
 msgid "Continue reading"
 msgstr ""
 
@@ -200,63 +196,63 @@ msgstr ""
 msgid "Medical Icons"
 msgstr ""
 
-#: functions.php:68
+#: functions.php:69
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:256, inc/customizer.php:36
+#: functions.php:260, inc/customizer.php:36
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:258
+#: functions.php:262
 msgid "Displays to the right or left of the content area."
 msgstr ""
 
-#: functions.php:267
+#: functions.php:271
 msgid "Shop"
 msgstr ""
 
-#: functions.php:269
+#: functions.php:273
 msgid "Displays on WooCommerce pages."
 msgstr ""
 
-#: functions.php:278, inc/customizer.php:40
+#: functions.php:282, inc/customizer.php:40
 msgid "Footer"
 msgstr ""
 
-#: functions.php:280
+#: functions.php:284
 msgid "Displays below the content area."
 msgstr ""
 
-#: functions.php:288
+#: functions.php:292
 msgid "Header"
 msgstr ""
 
-#: functions.php:290
+#: functions.php:294
 msgid "Displays to the right of the logo."
 msgstr ""
 
-#: functions.php:298
+#: functions.php:302
 msgid "Masthead"
 msgstr ""
 
-#: functions.php:300
+#: functions.php:304
 msgid "Replaces the logo and header widget area."
 msgstr ""
 
-#: functions.php:395
+#: functions.php:399
 msgid "Back To Top"
 msgstr ""
 
-#: functions.php:595
+#: functions.php:599
 msgid "SiteOrigin Page Builder"
 msgstr ""
 
-#: functions.php:600
+#: functions.php:604
 msgid "SiteOrigin Widgets Bundle"
 msgstr ""
 
-#: functions.php:605
+#: functions.php:609
 msgid "SiteOrigin CSS"
 msgstr ""
 
@@ -1188,7 +1184,7 @@ msgstr ""
 msgid "No Bottom Margin"
 msgstr ""
 
-#: inc/panels.php:332
+#: inc/panels.php:328
 msgid "Vantage Widgets"
 msgstr ""
 
@@ -1796,101 +1792,109 @@ msgstr ""
 msgid "Vantage is a flexible multipurpose theme. Its strength lies in its tight integration with some powerful plugins like Page Builder for responsive page layouts, Meta Slider for big beautiful sliders and WooCommerce to help you sell online. Vantage is fully responsive and retina ready. Use it to start a business site, portfolio or online store."
 msgstr ""
 
-#: inc/template-tags.php:50
+#: inc/template-tags.php:28
+msgid "View posts by "
+msgstr ""
+
+#: inc/template-tags.php:37
+msgid "Add author biographical info."
+msgstr ""
+
+#: inc/template-tags.php:85
 msgid "Post navigation"
 msgstr ""
 
-#: inc/template-tags.php:55
+#: inc/template-tags.php:90
 msgctxt "Previous post link"
 msgid "&larr;"
 msgstr ""
 
-#: inc/template-tags.php:56
+#: inc/template-tags.php:91
 msgctxt "Next post link"
 msgid "&rarr;"
 msgstr ""
 
-#: inc/template-tags.php:106
+#: inc/template-tags.php:141
 msgid "Pingback:"
 msgstr ""
 
-#: inc/template-tags.php:106
+#: inc/template-tags.php:141
 msgid "(Edit)"
 msgstr ""
 
-#: inc/template-tags.php:128
+#: inc/template-tags.php:163
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: inc/template-tags.php:133
+#: inc/template-tags.php:168
 msgid "Edit"
 msgstr ""
 
-#: inc/template-tags.php:138
+#: inc/template-tags.php:173
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/template-tags.php:171
+#: inc/template-tags.php:206
 msgid "View all posts by %s"
 msgstr ""
 
-#: inc/template-tags.php:184
+#: inc/template-tags.php:219
 msgid "Posted on %s"
 msgstr ""
 
-#: inc/template-tags.php:185
+#: inc/template-tags.php:220
 msgid "<span class=\"byline\"> by %s</span>"
 msgstr ""
 
-#: inc/template-tags.php:232
+#: inc/template-tags.php:267
 msgid "%s Logo"
 msgstr ""
 
-#: inc/template-tags.php:333
+#: inc/template-tags.php:368
 msgid "Category Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:337
+#: inc/template-tags.php:372
 msgid "Tag Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:342
+#: inc/template-tags.php:377
 msgid "Author Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:347
+#: inc/template-tags.php:382
 msgid "Daily Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:351
+#: inc/template-tags.php:386
 msgid "Monthly Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:390
 msgid "Yearly Archives: %s"
 msgstr ""
 
-#: inc/template-tags.php:362
+#: inc/template-tags.php:397
 msgid "%s: %s"
 msgstr ""
 
-#: inc/template-tags.php:365
+#: inc/template-tags.php:400
 msgid "Archives"
 msgstr ""
 
-#: inc/template-tags.php:381, inc/template-tags.php:384
+#: inc/template-tags.php:416, inc/template-tags.php:419
 msgid ", "
 msgstr ""
 
-#: inc/template-tags.php:389
+#: inc/template-tags.php:424
 msgid "<strong>Tagged</strong> %2$s."
 msgstr ""
 
-#: inc/template-tags.php:399
+#: inc/template-tags.php:434
 msgid "Posted in %1$s and tagged %2$s."
 msgstr ""
 
-#: inc/template-tags.php:402
+#: inc/template-tags.php:437
 msgid "Posted in %1$s."
 msgstr ""
 

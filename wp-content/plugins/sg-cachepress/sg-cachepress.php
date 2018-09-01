@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       SG Optimizer
  * Description:       This plugin will link your WordPress application with all the performance optimizations provided by SiteGround
- * Version:           3.3.1
+ * Version:           4.0.7
  * Author:            SiteGround
  * Text Domain:       sg-cachepress
  * Domain Path:       /languages
@@ -37,6 +37,11 @@ require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-admin.php';
 require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-phpversion-checker.php';
 require plugin_dir_path( __FILE__ ) . 'php-compatibility-checker/sg-wpengine-phpcompat.php';
 require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-ssl.php';
+require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-multisite.php';
+require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-log.php';
+require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-performance-tool.php';
+require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-time-collector.php';
+require plugin_dir_path( __FILE__ ) . 'class-sg-cachepress-htaccess-editor.php';
 
 
 //Register WP-CLI command
@@ -55,8 +60,6 @@ register_deactivation_hook( __FILE__, array( 'SG_CachePress', 'deactivate' ) );
 add_action( 'plugins_loaded','sg_cachepress_start' );
 add_action( 'admin_init', array('SG_CachePress','admin_init_cachepress') );
 
-add_action( 'init', 'disable_other_caching_plugins' );
-
 function filter_xmlrpc_login_error( $this_error, $user ) {
 	if (function_exists('c74ce9b9ffdebe0331d8e43e97206424_notify')) {
 		c74ce9b9ffdebe0331d8e43e97206424_notify("wpxmlrpc", getcwd(), "UNKNOWN");
@@ -65,15 +68,6 @@ function filter_xmlrpc_login_error( $this_error, $user ) {
 }
 add_filter( 'xmlrpc_login_error', 'filter_xmlrpc_login_error', 10, 2 );
 
-/**
- * Disables Other Caching Plugins if SG SuperCacher is enabled
- */
-function disable_other_caching_plugins()
-{
-    $sg_cachepress_options        = new SG_CachePress_Options;
-    if( $sg_cachepress_options->is_enabled('enable_cache') )
-        add_filter( 'do_rocket_generate_caching_files', '__return_false' );
-}
 
 /**
  * Initialise the classes in this plugin.
@@ -85,16 +79,20 @@ function disable_other_caching_plugins()
 function sg_cachepress_start() {
 
  	global $sg_cachepress, $sg_cachepress_options, $sg_cachepress_environment, $sg_cachepress_memcache,
- 	$sg_cachepress_admin, $sg_cachepress_supercacher;
+ 	$sg_cachepress_admin, $sg_cachepress_supercacher, $sg_cachepress_multisite, $sg_cachepress_performance_tool;
 
 	$sg_cachepress_options        = new SG_CachePress_Options;
 	$sg_cachepress_environment    = new SG_CachePress_Environment( $sg_cachepress_options );
+
+	$sg_cachepress_performance_tool = new SG_CachePress_Performance_Tool();
+
 	$sg_cachepress_admin    		= new SG_CachePress_Admin( $sg_cachepress_options );
 	$sg_cachepress_memcache       = new SG_CachePress_Memcache( $sg_cachepress_options, $sg_cachepress_environment );
 	$sg_cachepress_supercacher    = new SG_CachePress_Supercacher( $sg_cachepress_options, $sg_cachepress_environment );
 	$sg_cachepress                = new SG_CachePress( $sg_cachepress_options);
-        $sg_cachepress_phpversion_checker    		= new SG_CachePress_PHPVersionChecker( $sg_cachepress_options );
-        
+	$sg_cachepress_phpversion_checker    		= new SG_CachePress_PHPVersionChecker( $sg_cachepress_options );
+	$sg_cachepress_multisite = new SG_CachePress_Multisite();
+
         $sg_cachepress_phpversion_checker->run();
 	$sg_cachepress->run();
 	$sg_cachepress_admin->run();

@@ -34,8 +34,8 @@
                     ?>
                     <div class="col-md-12">
                         <div class="imghoverclass img-margin-center" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                            <a href="<?php the_permalink()  ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                                <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" <?php echo kt_get_srcset_output($image[1], $image[2], $image_src[0], $image_id);?>>
+                            <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title_attribute(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" <?php echo kt_get_srcset_output($image[1], $image[2], $image_src[0], $image_id);?>>
                                     <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                     <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                                     <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">
@@ -49,8 +49,8 @@
                         if(empty($image[0])) { $image = array($thumbnailURL, null, null); } ?>
                         <div class="col-md-12">
                         <div class="imghoverclass img-margin-center" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                          <a href="<?php the_permalink()  ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                                    <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" >
+                          <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                    <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title_attribute(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" >
                                     <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                     <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                                     <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">
@@ -68,8 +68,8 @@
                     if(empty($image[0])) { $image = $image_src; } ?>
                     <div class="col-md-5 post-image-container">
                         <div class="imghoverclass img-margin-center" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                            <a href="<?php the_permalink()  ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                                <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" <?php echo kt_get_srcset_output($image[1], $image[2], $image_src[0], $image_id);?>>
+                            <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title_attribute(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover" <?php echo kt_get_srcset_output($image[1], $image[2], $image_src[0], $image_id);?>>
                                 <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                 <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                                 <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">
@@ -83,8 +83,8 @@
                   if(empty($image[0])) { $image = array($thumbnailURL, null, null); } ?>
                   <div class="col-md-5 post-image-container">
                     <div class="imghoverclass img-margin-center" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                        <a href="<?php the_permalink()  ?>" title="<?php echo esc_attr(get_the_title()); ?>">
-                            <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover">
+                        <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                            <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title_attribute(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" itemprop="contentUrl"  class="iconhover">
                             <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                             <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                             <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">
@@ -109,7 +109,7 @@
                                         $alt = get_post_meta($attachment, '_wp_attachment_image_alt', true);
                                          if(empty($image[0])) {$image = $attachment_src;}  ?>
                                             <li>
-                                                <a href="<?php the_permalink() ?>" alt="<?php echo esc_attr(get_the_title()); ?>" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                                                <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                                                     <img src="<?php echo esc_attr($image[0]); ?>" itemprop="contentUrl" alt="<?php echo esc_attr($alt);?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" <?php echo kt_get_srcset_output($image[1], $image[2], $attachment_src[0], $attachment);?> />
                                                     <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                                     <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
@@ -140,7 +140,7 @@
                                             $alt = get_post_meta($attachment, '_wp_attachment_image_alt', true);
                                             if(empty($image[0])) {$image = $attachment_src;} ?>
                                             <li>
-                                                <a href="<?php the_permalink() ?>" alt="<?php echo esc_attr(get_the_title()); ?>" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                                                <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
                                                     <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr($alt);?>" itemprop="contentUrl" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" <?php echo kt_get_srcset_output($image[1], $image[2], $attachment_src[0], $attachment);?> />
                                                     <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                                     <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
@@ -186,7 +186,7 @@
                     </a>
                     <?php get_template_part('templates/entry', 'meta-subhead'); ?>    
                 </header>
-                <div class="entry-content" itemprop="articleBody">
+                <div class="entry-content" itemprop="description">
                     <?php 
                         do_action( 'kadence_post_excerpt_content_before' );
                         

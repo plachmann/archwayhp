@@ -4,7 +4,7 @@ Plugin Name: Under Construction / Maintenance Mode From Acurax
 Plugin URI: http://www.acurax.com/products/under-construction-maintenance-mode-wordpress-plugin
 Description: Simple and the best Coming Soon or Maintenance Mode Plugin Which Supports Practically Unlimited Responsive Designs.
 Author: Acurax 
-Version: 2.5.3
+Version: 2.5.8
 Author URI: http://wordpress.acurax.com
 License: GPLv2 or later
 Text Domain: coming-soon-maintenance-mode-from-acurax
@@ -27,11 +27,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ?>
 <?php
 /*************** Admin function ***************/
-define("ACX_CSMA_CURRENT_VERSION","2.5.3");
+define("ACX_CSMA_CURRENT_VERSION","2.5.8");
 define("ACX_CSMA_TOTAL_THEMES",5);
 define("ACX_CSMA_BASE_LOCATION",plugin_dir_url( __FILE__ ));
 define("ACX_CSMA_WP_SLUG","coming-soon-maintenance-mode-from-acurax");
-
+define('ACX_CSMA_LOG_DIR',WP_CONTENT_DIR . '/acx-csma-log');
 
 include_once(plugin_dir_path( __FILE__ ).'function.php');
 include_once(plugin_dir_path( __FILE__ ).'includes/defaults.php');
@@ -99,4 +99,29 @@ if ( is_admin() )
 	add_action('admin_menu', 'acx_csma_admin_actions');
 }
 include_once(plugin_dir_path( __FILE__ ).'includes/updates.php');
+/* Add settings link in plugin page */
+if(!function_exists('acx_csma_plugin_add_settings_link'))
+{
+	function acx_csma_plugin_add_settings_link( $links ) {
+		$acx_csma_settings_link = '<a href="'.esc_url(wp_nonce_url(admin_url('admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Settings'))).'">' . __( 'Settings' ) . '</a>';
+		array_unshift( $links, $acx_csma_settings_link );
+		return $links;
+	}
+	$plugin = plugin_basename( __FILE__ );
+	add_filter( "plugin_action_links_$plugin", 'acx_csma_plugin_add_settings_link' );
+
+}
+/* Add settings link in Plugin page */
+/* redirect to settings page after activate plugin */
+function acx_csma_plugin_activate() {
+    add_option('acx_csma_do_activation_redirect', true);
+}
+register_activation_hook(__FILE__, 'acx_csma_plugin_activate');
+function acx_csma_redirect() {
+    if (get_option('acx_csma_do_activation_redirect', false)) {
+        delete_option('acx_csma_do_activation_redirect');
+        wp_redirect(esc_url(wp_nonce_url(admin_url('admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Settings'))));
+    }
+}add_action('admin_init', 'acx_csma_redirect');
+/* redirect to settings page after activate plugin */
 ?>

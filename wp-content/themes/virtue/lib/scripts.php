@@ -3,9 +3,12 @@
  * Enqueue scripts and stylesheets
  *
  */
+function virtue_get_wc_version() {return defined( 'WC_VERSION' ) && WC_VERSION ? WC_VERSION : null;}
+function virtue_is_wc_version_gte_2_3() {return virtue_get_wc_version() && version_compare(virtue_get_wc_version(), '2.3', '>=' );}
+
 function kadence_scripts() {
   global $virtue;
-  wp_enqueue_style('kadence_theme', get_template_directory_uri() . '/assets/css/virtue.css', false, "284");
+  wp_enqueue_style('kadence_theme', get_template_directory_uri() . '/assets/css/virtue.css', false, "306");
  if(isset($virtue['skin_stylesheet']) || !empty($virtue['skin_stylesheet'])) {$skin = $virtue['skin_stylesheet'];} else { $skin = 'default.css';} 
  wp_enqueue_style('virtue_skin', get_template_directory_uri() . '/assets/css/skins/'.$skin.'', false, null);
  if(is_rtl()) {
@@ -20,8 +23,8 @@ function kadence_scripts() {
     wp_enqueue_script('comment-reply');
   }
 
-  wp_register_script('kadence_plugins', get_template_directory_uri() . '/assets/js/min/plugins-min.js', false, '284', true);
-  wp_register_script('kadence_main', get_template_directory_uri() . '/assets/js/main.js', false, '284', true);
+  wp_register_script('kadence_plugins', get_template_directory_uri() . '/assets/js/min/plugins-min.js', false, '306', true);
+  wp_register_script('kadence_main', get_template_directory_uri() . '/assets/js/main.js', false, '306', true);
   wp_enqueue_script('jquery');
   wp_enqueue_script('masonry');
   wp_enqueue_script('kadence_plugins');
@@ -32,10 +35,8 @@ function kadence_scripts() {
       wp_enqueue_script( 'kt-wc-add-to-cart-variation');
 
       if(isset($virtue['product_quantity_input']) && $virtue['product_quantity_input'] == 1) {
-          function kt_get_wc_version() {return defined( 'WC_VERSION' ) && WC_VERSION ? WC_VERSION : null;}
-          function kt_is_wc_version_gte_2_3() {return kt_get_wc_version() && version_compare(kt_get_wc_version(), '2.3', '>=' );}
-          if (kt_is_wc_version_gte_2_3() ) {
-            wp_register_script( 'wcqi-js', get_template_directory_uri() . '/assets/js/min/wc-quantity-increment.min.js' , array( 'jquery' ), false, '240', true );
+          if (virtue_is_wc_version_gte_2_3() ) {
+            wp_register_script( 'wcqi-js', get_template_directory_uri() . '/assets/js/min/wc-quantity-increment-min.js' , array( 'jquery' ), false, '297', true );
             wp_enqueue_script( 'wcqi-js' );
           }
         }

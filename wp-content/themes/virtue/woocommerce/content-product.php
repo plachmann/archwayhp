@@ -6,7 +6,7 @@
  *
  * @author 	WooThemes
  * @package WooCommerce/Templates
- * @version 2.6.1
+ * @version 3.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -47,7 +47,13 @@ $classes[] = 'clearfix';
 <div class="<?php echo esc_attr($itemsize);?> kad_product">
 	<div <?php post_class( $classes ); ?>>
 
-	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+	<?php 
+	/**
+	 * woocommerce_before_shop_loop_item hook.
+	 *
+	 * @hooked woocommerce_template_loop_product_link_open - 10
+	 */
+	do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
 	<a href="<?php the_permalink(); ?>" class="product_item_link product_img_link">
 

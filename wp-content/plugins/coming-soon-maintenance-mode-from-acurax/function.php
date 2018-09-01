@@ -27,6 +27,10 @@ if(is_serialized($acx_csma_display_var_arr))
 { 
 	$acx_csma_display_var_arr = unserialize($acx_csma_display_var_arr); 
 }
+if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+{
+	$acx_csma_display_var_arr = array();
+}
 if(empty($acx_csma_display_var_arr))
 {
 	$acx_csma_display_var_arr=array(
@@ -111,7 +115,7 @@ function acx_csma_colorpicker_scripts()
 // color picker
  if(ISSET($_GET['page']))
 {
-	$acx_csma_page=$_GET['page'];
+	$acx_csma_page = sanitize_text_field(trim($_GET['page']));
 }
 else
 {
@@ -247,21 +251,26 @@ function acx_csma_plugin_activation()
 			{
 				$acx_csma_role_array = unserialize($acx_csma_role_array); 
 			}
+			if($acx_csma_role_array == "" || !is_array($acx_csma_role_array))
+			{
+				$acx_csma_role_array = array();
+			}
 			$current_user = wp_get_current_user();
 			$roles = $current_user->roles;   //$roles -array
-			
+			$user_roles = "";
 			foreach($roles as $key=>$value)
 			{
-				$value = str_replace("_"," ",$value);
-				$user_roles=ucwords($value);	
+				$user_roles = $value;	
 			}
 			if(is_array($acx_csma_role_array))
 			{
-				if(in_array($user_roles,$acx_csma_role_array)|| $user_roles=="Administrator" || is_super_admin())
+				
+				if(in_array($user_roles,$acx_csma_role_array)|| $user_roles=="administrator" || is_super_admin())
 				{
 					//do not display maintenance page.....
 					$acx_csma_display_template=false;
 				}
+				
 			}
 		}
 	}
@@ -275,6 +284,10 @@ function acx_csma_plugin_activation()
 		if(is_serialized($acx_csma_ip_array))
 		{
 			$acx_csma_ip_array = unserialize($acx_csma_ip_array); 
+		}
+		if($acx_csma_ip_array == "" || !is_array($acx_csma_ip_array))
+		{
+			$acx_csma_ip_array = array();
 		}
 		$current_ip = acx_csma_getrealip();
 		
@@ -332,7 +345,7 @@ function acx_csma_template_preview()
 	$acx_csma_send_header_option = get_option('acx_csma_send_header_option');
 	if ($acx_csma_send_header_option == "") {	$acx_csma_send_header_option = "yes"; }
 	if(ISSET($_GET['acx_csma_preview']) && current_user_can( 'manage_options' )){
-		$acx_csma_preview=$_GET['acx_csma_preview'];
+		$acx_csma_preview = sanitize_text_field(trim($_GET['acx_csma_preview']));
 		if(is_array($acx_csma_template_array) && array_key_exists($acx_csma_preview,$acx_csma_template_array))
 		{
 			$protocol = "HTTP/1.0";
@@ -444,13 +457,34 @@ add_action('admin_head', 'acx_csma_upload_images_template_1');
 function acx_csma_quick_request_submit_callback()
 {
 	$acx_name =  $acx_email = $acx_phone = $acx_csma_es = $acx_weburl = $acx_subject = $acx_question = "";
-	$acx_name =  $_POST['acx_name'];
-	$acx_email =  $_POST['acx_email'];
-	$acx_phone =  $_POST['acx_phone'];
-	$acx_csma_es =  $_POST['acx_csma_es'];
-	$acx_weburl =  $_POST['acx_weburl'];
-	$acx_subject =  stripslashes($_POST['acx_subject']);
-	$acx_question =  stripslashes($_POST['acx_question']);
+	if(ISSET($_POST['acx_name']))
+	{
+		$acx_name =  $_POST['acx_name'];
+	}
+	if(ISSET($_POST['acx_email']))
+	{
+		$acx_email =  $_POST['acx_email'];
+	}
+	if(ISSET($_POST['acx_phone']))
+	{
+		$acx_phone =  $_POST['acx_phone'];
+	}
+	if(ISSET($_POST['acx_csma_es']))
+	{
+		$acx_csma_es =  $_POST['acx_csma_es'];
+	}
+	if(ISSET($_POST['acx_weburl']))
+	{
+		$acx_weburl =  $_POST['acx_weburl'];
+	}
+	if(ISSET($_POST['acx_subject']))
+	{
+		$acx_subject =  stripslashes($_POST['acx_subject']);
+	}
+	if(ISSET($_POST['acx_question']))
+	{
+		$acx_question =  stripslashes($_POST['acx_question']);
+	}
 	if (!wp_verify_nonce($acx_csma_es,'acx_csma_es'))
 	{
 		$acx_csma_es == "";
@@ -501,14 +535,14 @@ function acx_csma_add_items($admin_bar)
     'id'    => 'acx_csma_activation_msg',
     'parent' => 'top-secondary',
     'title' => __('Maintenance Mode is Activated','coming-soon-maintenance-mode-from-acurax'),
-    'href'  => 'admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Settings'
+    'href'  => esc_url(wp_nonce_url(admin_url('admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Settings')))
     );
 	if (!current_user_can('manage_options') ) {
         return;
     }
     $admin_bar->add_menu($args);
 }
-$acx_csma_activation_status=get_option('acx_csma_activation_status');
+$acx_csma_activation_status = get_option('acx_csma_activation_status');
 if($acx_csma_activation_status == 1 && is_admin())
 {
 	add_action('admin_bar_menu', 'acx_csma_add_items'); 
@@ -535,16 +569,16 @@ function acx_csma_subscribe_email()
 		$timestamp = $_POST['timestamp'];
 	}
 	$acx_csma_subscribe_details = get_option('acx_csma_subscribe_user_details');
-	if($acx_csma_subscribe_details != "")
+	
+	if(is_serialized($acx_csma_subscribe_details))
+	{ 
+		$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
+	}
+	if($acx_csma_subscribe_details == "" || !is_array($acx_csma_subscribe_details))
 	{
-		if(is_serialized($acx_csma_subscribe_details))
-		{ 
-			$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
-		}
-	}	
-	else{
-	$acx_csma_subscribe_details = array();
-	}	 
+		$acx_csma_subscribe_details = array();
+	}
+		 
 	$found = 0;
 	foreach($acx_csma_subscribe_details as $key => $value)
 	{
@@ -582,6 +616,10 @@ function acx_csma_subscribe_ajax()
 	{
 		$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
 	}	
+	if($acx_csma_subscribe_details == "" || !is_array($acx_csma_subscribe_details))
+	{
+		$acx_csma_subscribe_details = array();
+	}
 	if(!empty($acx_csma_subscribe_details)) {
 		$filename = 'subscribers-list-' . date('Y-m-d') . '.csv';
 		header('Content-Type: text/csv');
@@ -644,7 +682,7 @@ function acx_csma_service_addon_demo()
 		$acx_theme_addon_demo_array = array();
 	}
 	$acx_csma_lb_title = __('Showcase Products and Services While Your Website Is Under Construction','coming-soon-maintenance-mode-from-acurax');
-	$acx_csma_lb_content = "<p style=\"font-size:14px;\">".__('We have prepared 4 special themes ','coming-soon-maintenance-mode-from-acurax')."( <a href=\"https://clients.acurax.com/link.php?id=18\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-A','coming-soon-maintenance-mode-from-acurax')."</a>, <a href=\"https://clients.acurax.com/link.php?id=19\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-B','coming-soon-maintenance-mode-from-acurax')."</a>, <a href=\"https://clients.acurax.com/link.php?id=20\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-C','coming-soon-maintenance-mode-from-acurax')."</a>".__(' and','coming-soon-maintenance-mode-from-acurax')." <a href=\"https://clients.acurax.com/link.php?id=21\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-D','coming-soon-maintenance-mode-from-acurax')."</a> )". __('as an Addon plugin labeled \"Service Theme Pack 1\" which you can install just like a normal plugin after purchase. And the additional themes will be available here. These themes are designed and developed with high customizable options.','coming-soon-maintenance-mode-from-acurax')."<br><br>".__('This theme pack have 4 highly customizable themes with Contact/Lead Capture Form,Service/Product Showcase, About us Section etc... Check preview for a live preview.','coming-soon-maintenance-mode-from-acurax')."<br><br><a style=\"float: left; color: black; border: 1px solid black; border-radius: 3px; padding: 4px; font-size: 13px; opacity: 0.8;\"href=\"http://www.acurax.com/products/under-construction-maintenance-mode-wordpress-plugin/?feature=service-theme-pack-1&utm_source=preview_link&utm_medium=csma&utm_campaign=csma\" style=\"float:right;\" target=\"_blank\">".__('View Screenshots/More Details','coming-soon-maintenance-mode-from-acurax')."</a><a href=\"https://clients.acurax.com/order.php?pid=csmastp1&utm_source=preview_link&utm_medium=csma&utm_campaign=csma\" style=\"float:right;\" target=\"_blank\" class=\"button\">".__('Click Here to Order Now','coming-soon-maintenance-mode-from-acurax')."</a><br></p><p><br></p>";
+	$acx_csma_lb_content = "<p style=\"font-size:14px;\">".__('We have prepared 4 special themes ','coming-soon-maintenance-mode-from-acurax')."( <a href=\"https://clients.acurax.com/link.php?id=18\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-A','coming-soon-maintenance-mode-from-acurax')."</a>, <a href=\"https://clients.acurax.com/link.php?id=19\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-B','coming-soon-maintenance-mode-from-acurax')."</a>, <a href=\"https://clients.acurax.com/link.php?id=20\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-C','coming-soon-maintenance-mode-from-acurax')."</a>".__(' and','coming-soon-maintenance-mode-from-acurax')." <a href=\"https://clients.acurax.com/link.php?id=21\" target=\"_blank\" title=\"Preview This Theme\">".__('STP1-D','coming-soon-maintenance-mode-from-acurax')."</a> )". __('as an Addon plugin labeled "Service Theme Pack 1" which you can install just like a normal plugin after purchase. And the additional themes will be available here. These themes are designed and developed with high customizable options.','coming-soon-maintenance-mode-from-acurax')."<br><br>".__('This theme pack have 4 highly customizable themes with Contact/Lead Capture Form,Service/Product Showcase, About us Section etc... Check preview for a live preview.','coming-soon-maintenance-mode-from-acurax')."<br><br><a style=\"float: left; color: black; border: 1px solid black; border-radius: 3px; padding: 4px; font-size: 13px; opacity: 0.8;\"href=\"http://www.acurax.com/products/under-construction-maintenance-mode-wordpress-plugin/?feature=service-theme-pack-1&utm_source=preview_link&utm_medium=csma&utm_campaign=csma\" style=\"float:right;\" target=\"_blank\">".__('View Screenshots/More Details','coming-soon-maintenance-mode-from-acurax')."</a><a href=\"https://clients.acurax.com/order.php?pid=csmastp1&utm_source=preview_link&utm_medium=csma&utm_campaign=csma\" style=\"float:right;\" target=\"_blank\" class=\"button\">".__('Click Here to Order Now','coming-soon-maintenance-mode-from-acurax')."</a><br></p><p><br></p>";
 	foreach($acx_theme_addon_demo_array as $key => $value)
 	{
 		foreach($value as $k => $v)
@@ -708,6 +746,14 @@ function acx_csma_updated_fields_content()
 			{
 				$acx_csma_appearence_array['1']['acx_csma_custom_html_top_temp1_title'] = "";
 			}
+			if(!array_key_exists('acx_csma_footer_gdprcolor1',$acx_csma_appearence_array['1']))
+			{
+				$acx_csma_appearence_array['1']['acx_csma_footer_gdprcolor1'] = "#ffffff";
+			}
+			if(!array_key_exists('acx_csma_footer_gdpr_hovercolor1',$acx_csma_appearence_array['1']))
+			{
+				$acx_csma_appearence_array['1']['acx_csma_footer_gdpr_hovercolor1'] = "#e3e3e3";
+			}
 		}
 		if(ISSET($acx_csma_appearence_array['2']))
 		{
@@ -734,6 +780,14 @@ function acx_csma_updated_fields_content()
 			if(!array_key_exists('acx_csma_custom_css_temp2',$acx_csma_appearence_array['2']))
 			{
 				$acx_csma_appearence_array['2']['acx_csma_custom_css_temp2'] = "";
+			}
+			if(!array_key_exists('acx_csma_footer_gdprcolor2',$acx_csma_appearence_array['2']))
+			{
+				$acx_csma_appearence_array['2']['acx_csma_footer_gdprcolor2'] = "#000000";
+			}
+			if(!array_key_exists('acx_csma_footer_gdpr_hovercolor2',$acx_csma_appearence_array['2']))
+			{
+				$acx_csma_appearence_array['2']['acx_csma_footer_gdpr_hovercolor2'] = "#8f8f8f";
 			}
 		}
 		if(ISSET($acx_csma_appearence_array['3']))
@@ -774,12 +828,28 @@ function acx_csma_updated_fields_content()
 			{
 				$acx_csma_appearence_array['3']['acx_csma_custom_css_temp3'] = "";
 			}
+			if(!array_key_exists('acx_csma_footer_gdprcolor3',$acx_csma_appearence_array['3']))
+			{
+				$acx_csma_appearence_array['3']['acx_csma_footer_gdprcolor3'] = "#ffffff";
+			}
+			if(!array_key_exists('acx_csma_footer_gdpr_hovercolor3',$acx_csma_appearence_array['3']))
+			{
+				$acx_csma_appearence_array['3']['acx_csma_footer_gdpr_hovercolor3'] = "#fe7e01";
+			}
 		}
 		if(ISSET($acx_csma_appearence_array['4']))
 		{
 			if(!array_key_exists('acx_csma_custom_css_temp4',$acx_csma_appearence_array['4']))
 			{
 				$acx_csma_appearence_array['4']['acx_csma_custom_css_temp4'] = "";
+			}
+			if(!array_key_exists('acx_csma_footer_gdprcolor4',$acx_csma_appearence_array['4']))
+			{
+				$acx_csma_appearence_array['4']['acx_csma_footer_gdprcolor4'] = "#000000";
+			}
+			if(!array_key_exists('acx_csma_footer_gdpr_hovercolor4',$acx_csma_appearence_array['4']))
+			{
+				$acx_csma_appearence_array['4']['acx_csma_footer_gdpr_hovercolor4'] = "#adadad";
 			}
 		}
 		if(ISSET($acx_csma_appearence_array['5']))
@@ -807,6 +877,14 @@ function acx_csma_updated_fields_content()
 			if(!array_key_exists('acx_csma_custom_css_temp5',$acx_csma_appearence_array['5']))
 			{
 				$acx_csma_appearence_array['5']['acx_csma_custom_css_temp5'] = "";
+			}
+			if(!array_key_exists('acx_csma_footer_gdprcolor5',$acx_csma_appearence_array['5']))
+			{
+				$acx_csma_appearence_array['5']['acx_csma_footer_gdprcolor5'] = "#ffffff";
+			}
+			if(!array_key_exists('acx_csma_footer_gdpr_hovercolor5',$acx_csma_appearence_array['5']))
+			{
+				$acx_csma_appearence_array['5']['acx_csma_footer_gdpr_hovercolor5'] = "#a19e99";
 			}
 		}	
 	}
@@ -931,9 +1009,9 @@ function acx_csma_display_var_content()
 	{
 		$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
 	}
-	if($acx_csma_display_var_arr=="")
+	if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
 	{
-		$acx_csma_display_var_arr=array();
+		$acx_csma_display_var_arr = array();
 	}
 	$display_content.="<hr />";
 	ksort($acx_csma_display_var_arr);
@@ -1071,6 +1149,10 @@ function acx_csma_reset_disp_var_callback()
 	{
 		$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
 	}
+	if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+	{
+		$acx_csma_display_var_arr = array();
+	}
 	if(ISSET($acx_csma_display_var_arr[$acx_csma_reset_key]['default_singular']))
 	{
 		$acx_csma_display_var_arr[$acx_csma_reset_key]['singular']=$acx_csma_display_var_arr[$acx_csma_reset_key]['default_singular'];
@@ -1111,6 +1193,10 @@ function acx_csma_edit_disp_var_callback()
 	if(is_serialized($acx_csma_display_var_arr))
 	{
 		$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
+	}
+	if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+	{
+		$acx_csma_display_var_arr = array();
 	}
 	if(ISSET($acx_csma_display_var_arr[$acx_csma_edit_key]['default_singular']))
 	{
@@ -1153,6 +1239,10 @@ function acx_csma_open_disp_var_callback()
 	{
 		$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
 	}
+	if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+	{
+		$acx_csma_display_var_arr = array();
+	}
 	$heading = ucfirst($acx_csma_key);
 	$response .= "<div id='acx_csma_edit_box'><div id='acx_csma_edit_box_inner'><span id='acx_csma_heading'><h3>".__('Edit Text for ','coming-soon-maintenance-mode-from-acurax') .$heading."</h3></span><hr><div id='acx_csma_disp_var_inside_cnt'>";
 	if(ISSET($acx_csma_display_var_arr[$acx_csma_key]['default_singular']))
@@ -1180,6 +1270,10 @@ if(!function_exists('acx_csma_disp_var_to_show'))
 		{
 			$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
 		}
+		if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+		{
+			$acx_csma_display_var_arr = array();
+		}
 		if(isset($acx_csma_display_var_arr[$acx_csma_disp_key]['singular']))
 		{
 			$acx_csma_edit_singular=$acx_csma_display_var_arr[$acx_csma_disp_key]['singular'];
@@ -1199,10 +1293,14 @@ function acx_csma_get_db_array_value()
 	$acx_csma_appearence_array = apply_filters('acx_csma_demo_get_array_filter',$acx_csma_appearence_array);
 	if($acx_csma_appearence_array != "")
 	{
-			if(is_serialized($acx_csma_appearence_array))
-			{ 
-				$acx_csma_appearence_array = unserialize($acx_csma_appearence_array); 
-			}
+		if(is_serialized($acx_csma_appearence_array))
+		{ 
+			$acx_csma_appearence_array = unserialize($acx_csma_appearence_array); 
+		}
+		if($acx_csma_appearence_array == "" || !is_array($acx_csma_appearence_array))
+		{
+			$acx_csma_appearence_array = array();
+		}
 	}
 	return $acx_csma_appearence_array;
 }
@@ -1224,6 +1322,7 @@ function acx_csma_update_array_value($acx_csma_appearence_array)
 function acx_csma_appearence_array_refresh()
 {
 	global $acx_csma_appearence_array_default;
+	
 	$acx_csma_appearence_array = acx_csma_get_db_array_value();
 	$changes_happened = false;
 	if($acx_csma_appearence_array == "")
@@ -1265,6 +1364,10 @@ function update_acx_csma_display_var_array()
 	if(is_serialized($acx_csma_display_var_arr))
 	{
 		$acx_csma_display_var_arr=unserialize($acx_csma_display_var_arr);
+	}
+	if($acx_csma_display_var_arr == "" || !is_array($acx_csma_display_var_arr))
+	{
+		$acx_csma_display_var_arr = array();
 	}
 	if(is_array($acx_csma_display_var_arr))
 	{
@@ -1469,6 +1572,119 @@ if ($acx_csma_send_header_option == "") {	$acx_csma_send_header_option = "yes"; 
 } add_action('acx_csma_misc_hook_option_after_else','acx_csma_send_header_after_else');
 
 /*	Send Header Settings  Settings HTML - Get - Set Default Logic Ends Here */
+/* 	Acurax GDPR Settings HTML - Get - Set Default Logic Starts Here */
+function acx_csma_misc_gdpr_html()
+{
+	$acx_string = __('GDPR Settings','coming-soon-maintenance-mode-from-acurax');
+	print_acx_csma_option_block_start($acx_string);	
+	do_action('acx_csma_misc_gdpr_settings');
+	echo "<span class='acx_csma_q_sep'></span>";
+	print_acx_csma_option_block_end();
+}  add_action('acx_csma_misc_hook_option_fields','acx_csma_misc_gdpr_html',700);
+function acx_csma_gdpr_info_option()
+{
+	$acx_csma_gdpr_consent = '<b>Under Construction / Maintenance Mode From Acurax</b> can help users website to comply with GDPR, a regulation in European Union Law on Data Protection and Privacy. If you want to make <b>Under Construction / Maintenance Mode From Acurax</b> GDPR compliant, you need to include below information on your privacy policy statement.<br><br>We provide this Privacy Policy consent to inform you about our policies and procedures concerning the collection, use and disclosure of the personal information we receive and collect from users. By using Subscription form, we collects your submitted details like name email and your public IP Address, so that we can reach you back.<br><br>We are using/placing cookies at website back-end users for the proper functioning of plugin settings/options at the wp-admin of your website.';
+	echo "<span class='label' style='width:100%;'>". __($acx_csma_gdpr_consent,'coming-soon-maintenance-mode-from-acurax')."</span>";
+	echo "<span class='acx_csma_q_sep'></span>";
+	do_action('acx_csma_misc_gdpr_consent_hook');
+}
+add_action('acx_csma_misc_gdpr_settings','acx_csma_gdpr_info_option',100);
+
+function acx_csma_gdpr_info_check_option()
+{
+	global $acx_csma_form_text,$acx_csma_privacy_policy_title,$acx_csma_privacy_policy_desc,$acx_csma_gdpr_status;
+	echo "<span class='label' style='width:100%;'><input type='checkbox' style='width:4%;' name='acx_csma_gdpr_status'  id='acx_csma_gdpr_status' value='yes' ";if($acx_csma_gdpr_status == "yes"){echo 'checked';}
+	$acx_csma_consent_head = 'Yes, I would Like to Make this Plugin GDPR Compliant.';
+	echo "><span class='check_label_txt'>". __($acx_csma_consent_head,'coming-soon-maintenance-mode-from-acurax')."</span></span>";?>
+	<?php
+	echo "<span class='acx_csma_q_sep'></span>";
+	if($acx_csma_gdpr_status == "yes")
+	{
+		$acx_csma_display_style = "";
+	}
+	else{
+		$acx_csma_display_style = "style='display:none;'";
+	}
+	echo "<div class='csma_gdpr_settings_cvr' ".$acx_csma_display_style.">";
+	echo "<span class='label' style='width:50%;'>". __('What would you like to show as the cookie consent checkbox label on forms','coming-soon-maintenance-mode-from-acurax')."</span>";
+	echo "<input type='text' style='width:49%;' name='acx_csma_form_text' value='".acx_csma_option_text_after_save_hook_fn($acx_csma_form_text)."'>";
+	echo "<span class='acx_csma_q_sep'></span>";
+	echo "<span class='label' style='width:50%;'>". __('Privacy Policy Heading','coming-soon-maintenance-mode-from-acurax')."</span>";
+	echo "<input type='text' style='width:49%;' name='acx_csma_privacy_policy_title' value='".acx_csma_option_text_after_save_hook_fn($acx_csma_privacy_policy_title)."'>";
+	echo "<span class='acx_csma_q_sep'></span>";
+	echo "<span class='label' style='width:50%;'>". __('Privacy Policy Content','coming-soon-maintenance-mode-from-acurax')."</span>";
+	echo "<span class='acx_csma_q_sep'></span>";
+	$acx_csma_privacy_policy_desc = acx_csma_textarea_after_save_hook_function($acx_csma_privacy_policy_desc);
+	$acx_csma_settings = array( 'wpautop' => false );
+	wp_editor($acx_csma_privacy_policy_desc, "acx_csma_privacy_policy_desc", $acx_csma_settings );
+	echo "</div>";
+	echo "<span class='acx_csma_q_sep'></span>";
+	?>
+	<script type="text/javascript">
+	jQuery("#acx_csma_gdpr_status").change(function ()
+	{
+		if(this.checked) {
+			if(jQuery(this).val() == "yes")
+			{
+				jQuery(".csma_gdpr_settings_cvr").fadeIn();
+			}
+		}
+		else{
+			jQuery(".csma_gdpr_settings_cvr").fadeOut();
+		}
+	});
+	</script>
+	<?php
+}
+add_action('acx_csma_misc_gdpr_settings','acx_csma_gdpr_info_check_option',500);
+function acx_csma_gdpr_info_if()
+{
+	global $acx_csma_form_text,$acx_csma_privacy_policy_title,$acx_csma_privacy_policy_desc,$acx_csma_gdpr_status;
+	$acx_csma_form_text = $_POST['acx_csma_form_text'];
+	$acx_csma_form_text = acx_csma_text_before_save_hook_fn('acx_csma_form_text',$acx_csma_form_text);
+	update_option('acx_csma_form_text', $acx_csma_form_text);
+	
+	if(ISSET($_POST['acx_csma_gdpr_status']))
+	{
+		$acx_csma_gdpr_status = $_POST['acx_csma_gdpr_status'];
+	}
+	else{
+		$acx_csma_gdpr_status = "no"; 
+	}
+	update_option('acx_csma_gdpr_status', $acx_csma_gdpr_status);
+	$acx_csma_privacy_policy_title = $_POST['acx_csma_privacy_policy_title'];
+	$acx_csma_privacy_policy_title = acx_csma_text_before_save_hook_fn('acx_csma_privacy_policy_title',$acx_csma_privacy_policy_title);
+	update_option('acx_csma_privacy_policy_title', $acx_csma_privacy_policy_title);
+	
+	$acx_csma_privacy_policy_desc = $_POST['acx_csma_privacy_policy_desc'];
+	$acx_csma_privacy_policy_desc = acx_csma_textarea_before_save_hook_function('acx_csma_privacy_policy_desc',$acx_csma_privacy_policy_desc);
+	update_option('acx_csma_privacy_policy_desc', $acx_csma_privacy_policy_desc);
+} add_action('acx_csma_misc_hook_option_onpost','acx_csma_gdpr_info_if');
+
+function acx_csma_gdpr_info_else()
+{
+	global $acx_csma_form_text,$acx_csma_privacy_policy_title,$acx_csma_privacy_policy_desc,$acx_csma_gdpr_status;
+
+	$acx_csma_form_text = get_option('acx_csma_form_text');
+	$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+	$acx_csma_privacy_policy_title = get_option('acx_csma_privacy_policy_title');
+	$acx_csma_privacy_policy_desc = get_option('acx_csma_privacy_policy_desc');
+} 
+add_action('acx_csma_misc_hook_option_postelse','acx_csma_gdpr_info_else');
+function acx_csma_gdpr_info_after_else()
+{
+global $acx_csma_form_text,$acx_csma_privacy_policy_title,$acx_csma_privacy_policy_desc,$acx_csma_gdpr_status;
+
+if ($acx_csma_gdpr_status == "") {	$acx_csma_gdpr_status = "no"; }
+if ($acx_csma_privacy_policy_title == "") {	$acx_csma_privacy_policy_title = "Privacy Policy"; }
+if ($acx_csma_form_text == "") {	$acx_csma_form_text = "I have read and agree with the sites privacy policy"; }
+if ($acx_csma_privacy_policy_desc == "") {	$acx_csma_privacy_policy_desc = "This is to inform website visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.<br><br>If you choose to use our Service, then you agree to the collection and use of information in relation with this policy. The Personal Information that we collect are used for providing and improving the Service. We will not use or share your information with anyone.<br><br>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.<br><br>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us."; }
+
+
+} add_action('acx_csma_misc_hook_option_after_else','acx_csma_gdpr_info_after_else');
+ 
+ 
+/* 	Acurax GDPR Settings HTML - Get - Set Default Logic Ends Here */
 
 /* Define Misc Submit Button Starts Here */
 function acx_csma_misc_submit_button_html()
@@ -1478,7 +1694,7 @@ function acx_csma_misc_submit_button_html()
 	<?php
 echo "<span class='acx_csma_q_sep'></span>";
 } 
-add_action('acx_csma_misc_hook_option_fields','acx_csma_misc_submit_button_html',300);
+add_action('acx_csma_misc_hook_option_fields','acx_csma_misc_submit_button_html',900);
 /* Define Misc Submit Button Ends Here */
 // refresh 
 function acx_csma_install_licence_refresh_callback()
@@ -1540,15 +1756,18 @@ function acx_csma_install_licence_refresh_callback()
 					
 				}
 			}
-			
+			$response_stat = "success";
 		} 
+		else{
+			$response_stat = $result["status"];
+		}
 		$acx_csma_purchased_li_array[$licence]['status'] = $result['status'];
 		if(!is_serialized($acx_csma_purchased_li_array))
 		{
 			$acx_csma_purchased_li_array = serialize($acx_csma_purchased_li_array);
 		}
 		update_option('acx_csma_purchased_li_array',$acx_csma_purchased_li_array); 
-		$response_stat = "success";
+	
 	}
 	echo $response_stat;
 	die();

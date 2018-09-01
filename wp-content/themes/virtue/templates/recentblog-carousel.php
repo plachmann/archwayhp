@@ -52,8 +52,8 @@
 									$img_srcset = null;
 								}?>
 						<div class="imghoverclass" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-		                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-		                        <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" class="iconhover" <?php echo $img_srcset;?>>
+		                    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+		                        <img src="<?php echo esc_url($image[0]); ?>" alt="<?php the_title_attribute(); ?>" width="<?php echo esc_attr($image[1]);?>" height="<?php echo esc_attr($image[2]);?>" class="iconhover" <?php echo $img_srcset;?>>
 		                        <meta itemprop="url" content="<?php echo esc_url($image[0]); ?>">
                                 <meta itemprop="width" content="<?php echo esc_attr($image[1])?>">
                                 <meta itemprop="height" content="<?php echo esc_attr($image[2])?>">

@@ -1,28 +1,18 @@
 <?php
 $acx_csma_message = "";
-$acx_csma_subscribe_details=get_option('acx_csma_subscribe_user_details');
-if($acx_csma_subscribe_details == "")
+$acx_csma_subscribe_details=get_option('acx_csma_subscribe_user_details');	 
+if(is_serialized($acx_csma_subscribe_details))
+{
+	$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
+}	 
+if($acx_csma_subscribe_details == "" || !is_array($acx_csma_subscribe_details))
 {
 	$acx_csma_subscribe_details = array();
 }
-else
-{	 
-	if(is_serialized($acx_csma_subscribe_details))
-	{
-		$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
-	}	 
-	if(!is_array($acx_csma_subscribe_details))
-	{
-		$acx_csma_subscribe_details = array();
-	}
-}
-if(is_serialized($acx_csma_subscribe_details ))
-{
-	$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
-}
+
 if(ISSET($_GET['action']))
 {
-	$del = $_GET['action'];
+	$del = sanitize_text_field(trim($_GET['action']));
 }
 else
 {
@@ -30,7 +20,7 @@ else
 }
 if(ISSET($_GET['ID']))
 {
-	$id = $_GET['ID'];
+	$id = sanitize_text_field(trim($_GET['ID']));
 }
 else
 {
@@ -58,7 +48,10 @@ $acx_csma_subscribe_details=get_option('acx_csma_subscribe_user_details');
 	{
 		$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
 	}	
-
+if($acx_csma_subscribe_details == "" || !is_array($acx_csma_subscribe_details))
+	{
+		$acx_csma_subscribe_details = array();
+	}
 if ((ISSET( $_POST['action'] ) && $_POST['action'] == 'bulk_delete') || (ISSET( $_POST['action2'] ) && $_POST['action2'] == 'bulk_delete'))  
 {
 	$acx_csma_bulk_array=$_POST['acx_csma_checkbox'];
@@ -112,24 +105,15 @@ class  Acx_Csma_My_List_Table extends WP_List_Table
 	function acx_csma_data()
 	{
 		$acx_csma_subscribe_details=get_option('acx_csma_subscribe_user_details');
-
-		if($acx_csma_subscribe_details == "")
-		{
-			$acx_csma_subscribe_details = array();
-		} 
-		else
-		{	 
-			if(is_serialized($acx_csma_subscribe_details ))
-			{
-				$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
-			}	 
-		}
-
-		 if(is_serialized($acx_csma_subscribe_details ))
+		if(is_serialized($acx_csma_subscribe_details ))
 		{
 			$acx_csma_subscribe_details = unserialize($acx_csma_subscribe_details); 
-		}		 
- 
+		}	
+		if($acx_csma_subscribe_details == "" || !is_array($acx_csma_subscribe_details))
+		{
+			$acx_csma_subscribe_details = array();
+		}			
+		
 		$acx_csma_subscribe_details_new = array();
 
 		foreach($acx_csma_subscribe_details as $key => $value)

@@ -35,8 +35,8 @@
                               if(empty($image)) { $image = $thumbnailURL; } ?>
                               <div class="col-md-12">
                                   <div class="imghoverclass img-margin-center">
-                                    <a href="<?php the_permalink()  ?>" title="<?php the_title(); ?>">
-                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title(); ?>" class="iconhover" style="display:block;">
+                                    <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="iconhover" style="display:block;">
                                     </a> 
                                   </div>
                               </div>
@@ -47,8 +47,8 @@
                               if(empty($image)) { $image = $thumbnailURL; } ?>
                               <div class="col-md-12">
                                   <div class="imghoverclass img-margin-center">
-                                    <a href="<?php the_permalink()  ?>" title="<?php the_title(); ?>">
-                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title(); ?>" class="iconhover" style="display:block;">
+                                    <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="iconhover" style="display:block;">
                                     </a> 
                                   </div>
                               </div>
@@ -65,8 +65,8 @@
                               if(empty($image)) { $image = $thumbnailURL; } ?>
                                 <div class="col-md-4">
                                   <div class="imghoverclass img-margin-center">
-                                    <a href="<?php the_permalink()  ?>" title="<?php the_title(); ?>">
-                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title(); ?>" class="iconhover" style="display:block;">
+                                    <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                      <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="iconhover" style="display:block;">
                                     </a> 
                                   </div>
                                 </div>
@@ -77,8 +77,8 @@
                               if(empty($image)) { $image = $thumbnailURL; } ?>
                           <div class="col-md-4">
                               <div class="imghoverclass img-margin-center">
-                                <a href="<?php the_permalink()  ?>" title="<?php the_title(); ?>">
-                                  <img src="<?php echo esc_url($image); ?>" alt="<?php the_title(); ?>" class="iconhover" style="display:block;">
+                                <a href="<?php the_permalink()  ?>" title="<?php the_title_attribute(); ?>">
+                                  <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" class="iconhover" style="display:block;">
                                 </a> 
                               </div>
                           </div>
@@ -100,7 +100,7 @@
                                                   $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
                                                     if(empty($image)) {$image = $attachment_url;} ?>
                                                     <li>
-                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title(); ?>">
+                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>">
                                                         <img src="<?php echo esc_url($image); ?>" class="" />
                                                       </a>
                                                     </li>
@@ -116,7 +116,7 @@
                                                     $image = aq_resize($attachment_url, $slidewidth, $slideheight, true);
                                                       if(empty($image)) {$image = $attachment_url;} ?>
                                                     <li>
-                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title(); ?>">
+                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>">
                                                         <img src="<?php echo esc_url($image); ?>" class="" />
                                                       </a>
                                                     </li>
@@ -142,7 +142,7 @@
                                                   $image = aq_resize($attachment_url, 360, 360, true);
                                                     if(empty($image)) {$image = $attachment_url;} ?>
                                                     <li>
-                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title(); ?>">
+                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>">
                                                         <img src="<?php echo esc_url($image); ?>" class="" />
                                                       </a>
                                                     </li>
@@ -158,7 +158,7 @@
                                                     $image = aq_resize($attachment_url, 370, 370, true);
                                                       if(empty($image)) {$image = $attachment_url;} ?>
                                                     <li>
-                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title(); ?>">
+                                                      <a href="<?php the_permalink() ?>" alt="<?php the_title_attribute(); ?>">
                                                         <img src="<?php echo esc_url($image); ?>" class="" />
                                                       </a>
                                                     </li>
@@ -189,7 +189,7 @@
                               <a href="<?php the_permalink() ?>"><h2 class="entry-title" itemprop="name headline"><?php the_title(); ?></h2></a>
                                <?php get_template_part('templates/entry', 'meta-subhead'); ?>  
                           </header>
-                          <div class="entry-content" itemprop="articleBody">
+                          <div class="entry-content" itemprop="description">
                               <?php the_excerpt(); ?>
                           </div>
                           <footer>

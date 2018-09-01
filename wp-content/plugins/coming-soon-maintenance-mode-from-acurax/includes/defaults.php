@@ -41,6 +41,8 @@ function acx_csma_appearence_array_default_value_setting($acx_csma_appearence_ar
 	$acx_csma_footer_text1="&copy;". date("Y").__(" All rights reserved","coming-soon-maintenance-mode-from-acurax");
 	$acx_csma_footer_text_color1="#ffffff";
 	$acx_csma_custom_css_temp1= "";
+	$acx_csma_footer_gdprcolor1 = "#ffffff";
+	$acx_csma_footer_gdpr_hovercolor1 = "#e3e3e3";
 	// *******************template2*********************
 	$acx_csma_bg_color2="#e4e4e4";
 	$acx_csma_logo2= ACX_CSMA_BASE_LOCATION . 'templates/2/images/logo.png';
@@ -81,6 +83,8 @@ function acx_csma_appearence_array_default_value_setting($acx_csma_appearence_ar
 	$acx_csma_twitter_link2="";
 	$acx_csma_linkedin_link2="";
 	$acx_csma_custom_css_temp2="";
+	$acx_csma_footer_gdprcolor2 = "#000000";
+	$acx_csma_footer_gdpr_hovercolor2 = "#8f8f8f";
 	//*******************template 3*******************
 	$acx_csma_logo3= ACX_CSMA_BASE_LOCATION . 'templates/3/images/logo.png';
 	$acx_csma_logo_choice3="image";
@@ -125,6 +129,9 @@ function acx_csma_appearence_array_default_value_setting($acx_csma_appearence_ar
 	$acx_csma_twitter_link3="";
 	$acx_csma_linkedin_link3="";
 	$acx_csma_custom_css_temp3="";
+	
+	$acx_csma_footer_gdprcolor3 = "#ffffff";
+	$acx_csma_footer_gdpr_hovercolor3 = "#fe7e01";
 	// ******************template 4*******************
 	$acx_csma_background_image4 = ACX_CSMA_BASE_LOCATION . 'templates/4/images/body_bg.jpg';
 	$acx_csma_logo4 = ACX_CSMA_BASE_LOCATION . 'templates/4/images/logo.png';
@@ -157,6 +164,8 @@ function acx_csma_appearence_array_default_value_setting($acx_csma_appearence_ar
 	$acx_csma_twitter_link4="";
 	$acx_csma_linkedin_link4="";
 	$acx_csma_custom_css_temp4= "";
+	$acx_csma_footer_gdprcolor4 = "#000000";
+	$acx_csma_footer_gdpr_hovercolor4 = "#adadad";
 	//*******************template 5********************
 	$acx_csma_bgcolor5="#e9eaec";
 	$acx_csma_logo5= ACX_CSMA_BASE_LOCATION . 'templates/5/images/logo.png';
@@ -190,6 +199,9 @@ function acx_csma_appearence_array_default_value_setting($acx_csma_appearence_ar
 	$acx_csma_twitter_link5="";
 	$acx_csma_linkedin_link5="";
 	$acx_csma_custom_css_temp5= "";
+	
+	$acx_csma_footer_gdprcolor5 = "#ffffff";
+	$acx_csma_footer_gdpr_hovercolor5 = "#a19e99";
 
 $acx_csma_appearence_array_default['1'] = array(
 						'acx_csma_background_image1'=>$acx_csma_background_image1,
@@ -229,6 +241,8 @@ $acx_csma_appearence_array_default['1'] = array(
 						'acx_csma_footer_bgcolor1'=>sanitize_text_field($acx_csma_footer_bgcolor1),
 						'acx_csma_footer_text1'=>sanitize_text_field($acx_csma_footer_text1),
 						'acx_csma_footer_text_color1'=>sanitize_text_field($acx_csma_footer_text_color1),
+						'acx_csma_footer_gdprcolor1'=>sanitize_text_field($acx_csma_footer_gdprcolor1),
+						'acx_csma_footer_gdpr_hovercolor1'=>sanitize_text_field($acx_csma_footer_gdpr_hovercolor1),
 						'acx_csma_custom_css_temp1'=>sanitize_text_field($acx_csma_custom_css_temp1)
 						);
 $acx_csma_appearence_array_default['2'] = array(
@@ -270,7 +284,9 @@ $acx_csma_appearence_array_default['2'] = array(
 						'acx_csma_fb_link2'=>esc_url_raw($acx_csma_fb_link2),
 						'acx_csma_twitter_link2'=>esc_url_raw($acx_csma_twitter_link2),
 						'acx_csma_linkedin_link2'=>esc_url_raw($acx_csma_linkedin_link2),
-						'acx_csma_custom_css_temp2'=>$acx_csma_custom_css_temp2
+						'acx_csma_custom_css_temp2'=>$acx_csma_custom_css_temp2,
+						'acx_csma_footer_gdprcolor2'=>sanitize_text_field($acx_csma_footer_gdprcolor2),
+						'acx_csma_footer_gdpr_hovercolor2'=>sanitize_text_field($acx_csma_footer_gdpr_hovercolor2),
 						);
 $acx_csma_appearence_array_default['3'] =array(
 						'acx_csma_logo_choice'=>sanitize_text_field($acx_csma_logo_choice3),
@@ -315,7 +331,9 @@ $acx_csma_appearence_array_default['3'] =array(
 						'acx_csma_fb_link3'=>esc_url_raw($acx_csma_fb_link3),
 						'acx_csma_twitter_link3'=>esc_url_raw($acx_csma_twitter_link3),
 						'acx_csma_linkedin_link3'=>esc_url_raw($acx_csma_linkedin_link3),
-						'acx_csma_custom_css_temp3'=>$acx_csma_custom_css_temp3
+						'acx_csma_custom_css_temp3'=>$acx_csma_custom_css_temp3,
+						'acx_csma_footer_gdprcolor3'=>sanitize_text_field($acx_csma_footer_gdprcolor3),
+						'acx_csma_footer_gdpr_hovercolor3'=>sanitize_text_field($acx_csma_footer_gdpr_hovercolor3),
 						);
 $acx_csma_appearence_array_default['4'] =array(
 						'acx_csma_background_image4'=>$acx_csma_background_image4,
@@ -348,6 +366,8 @@ $acx_csma_appearence_array_default['4'] =array(
 						'acx_csma_fb_link4'=>esc_url_raw($acx_csma_fb_link4),
 						'acx_csma_twitter_link4'=>esc_url_raw($acx_csma_twitter_link4),
 						'acx_csma_linkedin_link4'=>esc_url_raw($acx_csma_linkedin_link4),
+						'acx_csma_footer_gdprcolor4'=>sanitize_text_field($acx_csma_footer_gdprcolor4),
+						'acx_csma_footer_gdpr_hovercolor4'=>sanitize_text_field($acx_csma_footer_gdpr_hovercolor4),
 						'acx_csma_custom_css_temp4'=>sanitize_text_field($acx_csma_custom_css_temp4)
 						);
 $acx_csma_appearence_array_default['5'] =array(
@@ -382,6 +402,8 @@ $acx_csma_appearence_array_default['5'] =array(
 						'acx_csma_fb_link5'=>esc_url_raw($acx_csma_fb_link5),
 						'acx_csma_twitter_link5'=>esc_url_raw($acx_csma_twitter_link5),
 						'acx_csma_linkedin_link5'=>esc_url_raw($acx_csma_linkedin_link5),
+						'acx_csma_footer_gdprcolor5'=>sanitize_text_field($acx_csma_footer_gdprcolor5),
+						'acx_csma_footer_gdpr_hovercolor5'=>sanitize_text_field($acx_csma_footer_gdpr_hovercolor5),
 						'acx_csma_custom_css_temp5'=>sanitize_text_field($acx_csma_custom_css_temp5)
 						);			
 	return $acx_csma_appearence_array_default;

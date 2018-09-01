@@ -2,7 +2,7 @@
 Contributors: Hristo Sg, danielkanchev, ivanyordanov, siteground
 Tags: nginx, caching, speed, memcache, memcached, performance, siteground, nginx, supercacher
 Requires at least: 3.0.1
-Tested up to: 4.7
+Tested up to: 4.9
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,6 +40,8 @@ In order to work correctly, this plugin requires that your server meets the foll
 * PHP 5.5
 * SiteGround account
 * If you're not hosted with SiteGround this plugin WILL NOT WORK  because it relies on a specific server configuration
+
+Our plugin uses a cookie in order to function properly. It does not store personal data and is used solely for the needs of our caching system.
 
 == Installation ==
 
@@ -79,8 +81,49 @@ Force HTTPS on/off -- enable or disable the the https redirect for your whole si
 
 == Changelog ==
 
+= Version 4.0.7 =
+* Fixed bug in the force SSL functionality in certain cases for MS
+* Added information about the cookie our plugin uses in the readme file
+
+= Version 4.0.6 =
+* Bug fixes
+* Better https enforcement in MS environment
+
+= Version 4.0.5 =
+* Removed stopping of WP Rocket cache
+
+= Version 4.0.4 =
+* Minor bug fixes
+
+= Version 4.0.3 =
+* Switching recommended PHP Version to 7.1
+
+= Version 4.0.2 =
+* WPML and Memcache / Memcached bug fix
+
+= Version 4.0.1 =
+* Minor bug fixes
+* UK locale issue fixed
+
+= Version 4.0.0 =
+* Added proper Multisite support
+* Quick optimizations - Gzip and Browser cache config settings for the Network Admin
+* Network admin can purge the cache per site 
+* Network admin can disallow Cache and HTTPS configuration pages per site
+* WPML support when Memcached is enabled
+* Cache is being purged per site and not for the entire network
+* Multiple performance & interface improvements
+* Security fixes against, additional access checks introduced
+* Fixed minor cosmetic errors in the interface
+
+= Version 3.3.3 =
+* Fixed minor interface issues
+
+= Version 3.3.2 =
+* Fixed bug with disabling the Force HTTPS option
+
 = Version 3.3.1 =
-* Fixed cache purge issue when CloudFlare is enabled 
+* Fixed cache purge issue when CloudFlare is enabled
 * Added logging of failed attempts in XMLRPC API.
 
 = Version 3.3.0 =

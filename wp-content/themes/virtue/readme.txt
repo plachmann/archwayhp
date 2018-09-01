@@ -30,6 +30,88 @@ Yes, go here: https://wordpress.org/support/theme/virtue
 
 = Theme Name: Virtue =
 
+= Version 3.0.6 | 25th August 2017 = 
+* Add: string translate for blog category.
+
+= Version 3.0.5 | 17th August 2017 = 
+* Fix: css import issue.
+* Fix: POT so that esc_html__ is added. 
+
+= Version 3.0.4 | 8th August 2017 = 
+* Fix issue with WPML
+* Update: Small CSS change
+
+= Version 3.0.3 | 27th June 2017 = 
+* Fix issue with skip to content.
+
+= Version 3.0.2 | 27th June 2017 = 
+* Update: ready for WC 3.1.0
+* Update: Header and footer templates for better plugin compatibility
+
+= Version 3.0.1 | 19th June 2017 = 
+* Update: Schema.
+* Update: Small css update.
+
+= Version 3.0.0 | 17th May 2017 = 
+* Update: Woo Template.
+* Update: Schema.
+
+= Version 2.9.9 | 9th April 2017 = 
+* Update: Woo Template
+
+= Version 2.9.8 | 20th April 2017 = 
+* Fix: Issue with wc notice
+* Fix: Missing icon in admin.
+
+= Version 2.9.7 | 18th April 2017 = 
+* Fix: Issue with cart reload and quantity.
+* Update: Icon font to include vimeo.
+
+= Version 2.9.6 | 17th April 2017 = 
+* Fix: Issue with WC notice.
+
+= Version 2.9.5 | 13th April 2017 = 
+* Fix: Issue with undifined varible.
+* Fix: Issue with shop back link.
+
+= Version 2.9.4 | 12th April 2017 = 
+* Fix: Issue with woocommerce zoom init.
+* Update: Checkout CSS.
+* Fix: Woo Notice.
+
+= Version 2.9.3 | 6th April 2017 =
+* Fix: Notice from WC of out of date templates.
+
+= Version 2.9.2 | 3rd April 2017 =
+* Fix: Small bug with thumbnails srcset and photon.
+* Update: Google font options.
+
+= Version 2.9.1 | 3rd April 2017 =
+* Update: Fix for Jetpack Photon.
+* Update: Fix for certain variation plugin.
+
+= Version 2.9.0 | 31th March 2017 =
+* Update: Ready for WC 3.0
+* Update: Move user profile options to plugin.
+* Update: Start intergrating Kadence Image processing.
+
+= Version 2.8.9 | 18th March 2017 =
+* Update: Grouped Product issue.
+* Update: Single Product issue.
+* Update: Lightbox Title issue.
+
+= Version 2.8.8 | 13th March 2017 =
+* Update: Grouped Product issue.
+* Update: Google Fonts
+
+= Version 2.8.7 | 10th March 2017 =
+* Update: Woocommerce 2.7 Support.
+
+= Version 2.8.6 | 7th March 2017 =
+* Update: css for checkout.
+* Update: Image resize functions.
+* Update: Woocommerce 2.7 Support.
+
 = Version 2.8.5 | 24th January 2017 =
 * Update: Fitvids.
 * Update: Css.

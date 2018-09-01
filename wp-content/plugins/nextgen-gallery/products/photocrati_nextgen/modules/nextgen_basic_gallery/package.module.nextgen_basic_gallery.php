@@ -295,11 +295,7 @@ class A_NextGen_Basic_Slideshow_Form extends Mixin_Display_Type_Form
     }
     function enqueue_static_resources()
     {
-        wp_enqueue_script('nextgen_basic_slideshow_settings-js', $this->get_static_url('photocrati-nextgen_basic_gallery#slideshow/nextgen_basic_slideshow_settings.js'), array('jquery.nextgen_radio_toggle'), NGG_SCRIPT_VERSION);
-        $atp = C_Attach_Controller::get_instance();
-        if ($atp != null) {
-            $atp->mark_script('nextgen_basic_slideshow_settings-js');
-        }
+        $this->object->enqueue_script('nextgen_basic_slideshow_settings-js', $this->get_static_url('photocrati-nextgen_basic_gallery#slideshow/nextgen_basic_slideshow_settings.js'), array('jquery.nextgen_radio_toggle'));
     }
     /**
      * Returns a list of fields to render on the settings page
@@ -357,12 +353,8 @@ class A_NextGen_Basic_Thumbnail_Form extends Mixin_Display_Type_Form
      */
     function enqueue_static_resources()
     {
-        wp_enqueue_style('nextgen_basic_thumbnails_settings', $this->object->get_static_url('photocrati-nextgen_basic_gallery#thumbnails/nextgen_basic_thumbnails_settings.css'), FALSE, NGG_SCRIPT_VERSION);
-        wp_enqueue_script('nextgen_basic_thumbnails_settings', $this->object->get_static_url('photocrati-nextgen_basic_gallery#thumbnails/nextgen_basic_thumbnails_settings.js'), array('jquery.nextgen_radio_toggle'), NGG_SCRIPT_VERSION);
-        $atp = C_Attach_Controller::get_instance();
-        if ($atp != null) {
-            $atp->mark_script('nextgen_basic_thumbnails_settings');
-        }
+        $this->object->enqueue_style('nextgen_basic_thumbnails_settings', $this->object->get_static_url('photocrati-nextgen_basic_gallery#thumbnails/nextgen_basic_thumbnails_settings.css'));
+        $this->object->enqueue_script('nextgen_basic_thumbnails_settings', $this->object->get_static_url('photocrati-nextgen_basic_gallery#thumbnails/nextgen_basic_thumbnails_settings.js'), array('jquery.nextgen_radio_toggle'));
     }
     /**
      * Returns a list of fields to render on the settings page
@@ -542,7 +534,7 @@ class A_NextGen_Basic_Thumbnails_Controller extends Mixin
                 $params['thumbnail_size_name'] = $thumbnail_size_name;
                 $params['slideshow_link'] = $slideshow_link;
                 $params = $this->object->prepare_display_parameters($displayed_gallery, $params);
-                $output = $this->object->render_view('photocrati-nextgen_basic_gallery#thumbnails/index', $params, $return);
+                $output = $this->object->render_partial('photocrati-nextgen_basic_gallery#thumbnails/index', $params, $return);
             }
             return $output;
         } else {
@@ -550,6 +542,7 @@ class A_NextGen_Basic_Thumbnails_Controller extends Mixin
                 return $this->object->render_partial("photocrati-nextgen_gallery_display#no_images_found", array(), $return);
             }
         }
+        return '';
     }
     /**
      * Enqueues all static resources required by this display type

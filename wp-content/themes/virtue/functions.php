@@ -23,6 +23,8 @@ require_once locate_template('/lib/metaboxes.php');     					// Custom metaboxes
 require_once locate_template('/lib/comments.php');        					// Custom comments modifications
 require_once locate_template('/lib/widgets.php');         					// Sidebars and widgets
 require_once locate_template('/lib/aq_resizer.php');      					// Resize on the fly
+require_once locate_template('/lib/image_functions.php');        			// Image functions
+require_once locate_template('/lib/class-virtue-get-image.php');        	// Image Class
 require_once locate_template('/lib/scripts.php');        					// Scripts and stylesheets
 require_once locate_template('/lib/custom.php');          					// Custom functions
 require_once locate_template('/lib/admin_scripts.php');          			// Icon functions

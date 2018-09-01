@@ -16,13 +16,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'archwayh_wp144');
+define('DB_NAME','maclachc_wp144');
 
 /** MySQL database username */
-define('DB_USER', 'archwayh_wp144');
+define('DB_USER','maclachc_wp144');
 
 /** MySQL database password */
-define('DB_PASSWORD', '9yS)x03C[P');
+define('DB_PASSWORD','9yS)x03C[P');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -59,6 +59,7 @@ define('NONCE_SALT',       'q4yzayody4zwnhy2viztyyyjqxmdu0n2mxzgewmjayzwu3ymjkng
  * You can have multiple installations in one database if you give each a unique
  * prefix. Only numbers, letters, and underscores please!
  */
+define('WP_CACHE_KEY_SALT', 'B+YVe+SFSfe5yAJJyG7/dw');
 $table_prefix  = 'wp_';
 
 /**

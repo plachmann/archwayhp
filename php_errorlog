@@ -1,0 +1,1 @@
+[28-Apr-2018 10:04:30 UTC] PHP Warning:  trim() expects parameter 1 to be string, array given in /home/archwayh/public_html/wp-includes/class-wp-query.php on line 736

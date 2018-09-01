@@ -191,9 +191,9 @@ if(!class_exists('Aq_Resize')) {
                         if (true == $crop && ( $dst_x2_w < $retina_w || $dst_x2_h < $retina_h ) ) {
                             // do nothing
                         } else {
-                    
+                    		$x2suffix = "{$dst_x2_w}x{$dst_x2_h}";
                             //@2x image url
-                            $destfilename = "{$upload_dir}{$dst_rel_path}-{$suffix}@2x.{$ext}";
+                            $destfilename = "{$upload_dir}{$dst_rel_path}-{$x2suffix}.{$ext}";
                             
                             //check if retina image exists
                             if(file_exists($destfilename) && getimagesize($destfilename)) { 
@@ -202,10 +202,9 @@ if(!class_exists('Aq_Resize')) {
                                 // doesnt exist, lets create it
                                 $editor = wp_get_image_editor($img_path);
                                 if ( ! is_wp_error( $editor ) ) {
-                                    $editor->resize( $retina_w, $retina_h, $crop );
-                                    $editor->set_quality( 100 );
-                                    $filename = $editor->generate_filename( $dst_w . 'x' . $dst_h . '@2x'  );
-                                    $editor = $editor->save($filename); 
+                                	$editor->resize( $retina_w, $retina_h, true );
+                                   
+                                    $editor = $editor->save(); 
                                 }
                             }
                         }

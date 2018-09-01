@@ -4,29 +4,6 @@
  */
 global $virtue;
 
-function virtue_img_placeholder() {
-  return get_template_directory_uri() . '/assets/img/placement.png';
-}
-function virtue_post_widget_default_placeholder() {
-   return apply_filters('kadence_post_default_widget_placeholder_image', get_template_directory_uri() . '/assets/img/post_standard-80x50.jpg');
-}
-function virtue_post_default_placeholder() {
-   return apply_filters('kadence_post_default_placeholder_image', get_template_directory_uri() . '/assets/img/post_standard.jpg');
-}
-
-function virtue_post_default_placeholder_override() {
-  global $virtue;
-  $custom_image = $virtue['post_summery_default_image']['url'];
-  return $custom_image;
-}
-function virtue_post_default_placeholder_init() {
-  global $virtue;
-  if (isset($virtue['post_summery_default_image']) && !empty($virtue['post_summery_default_image']['url'])) {
-  add_filter('kadence_post_default_placeholder_image', 'virtue_post_default_placeholder_override');
-  add_filter('kadence_post_default_widget_placeholder_image', 'virtue_post_default_placeholder_override');
-  }
-}
-add_action('init', 'virtue_post_default_placeholder_init');
 
 //Page Navigation
 
@@ -62,7 +39,7 @@ function virtue_lightbox_off() {
 }
 add_action('wp_footer', 'virtue_lightbox_off');
 
-add_action('get_header', 'virtue_skip_link', 1);
+add_action('virtue_after_body', 'virtue_skip_link', 1);
 function virtue_skip_link() {
  echo '<div id="kt-skip-link"><a href="#content">Skip to Main Content</a></div>';
 }
@@ -98,7 +75,19 @@ add_filter( 'max_srcset_image_width','kt_srcset_max');
 function kt_srcset_max($string) {
   return 2000;
 }
-
+function virtue_template_override_init() {
+	if(class_exists('EventOrganiser_Admin_Page')) {
+	    add_filter('template_include', 'virtue_evento_venue_overide', 20);
+	    function virtue_evento_venue_overide($template) {
+	          if(is_tax( 'event-venue' ) ) {
+	            remove_filter('template_include', array('Kadence_Wrapping', 'wrap'), 101);
+	            add_filter('template_include', array('Kadence_Wrapping', 'wrap'), 99999);
+	          }
+	          return $template;
+	    }
+	}
+}
+add_action('init', 'virtue_template_override_init');
 function kt_get_srcset($width,$height,$url,$id) {
   if(empty($id) || empty($url)) {
     return;
@@ -109,42 +98,43 @@ function kt_get_srcset($width,$height,$url,$id) {
     return;
   }
   // If possible add in our images on the fly sizes
-  $ext = substr($image_meta['file'], strrpos($image_meta['file'], "."));
-  $pathflyfilename = str_replace($ext,'-'.$width.'x'.$height.'' . $ext, $image_meta['file']);
-  $pathretinaflyfilename = str_replace($ext, '-'.$width.'x'.$height.'@2x' . $ext, $image_meta['file']);
-  $flyfilename = basename($image_meta['file'], $ext) . '-'.$width.'x'.$height.'' . $ext;
-  $retinaflyfilename = basename($image_meta['file'], $ext) . '-'.$width.'x'.$height.'@2x' . $ext;
+  	$ext = substr($image_meta['file'], strrpos($image_meta['file'], "."));
+  	$pathflyfilename = str_replace($ext,'-'.$width.'x'.$height.'' . $ext, $image_meta['file']);
+  	$retina_w = $width*2;
+	$retina_h = $height*2;
+  	$pathretinaflyfilename = str_replace($ext, '-'.$retina_w.'x'.$retina_h . $ext, $image_meta['file']);
+  	$flyfilename = basename($image_meta['file'], $ext) . '-'.$width.'x'.$height.'' . $ext;
+  	$retinaflyfilename = basename($image_meta['file'], $ext) . '-'.$retina_w.'x'.$retina_h . $ext;
 
-  $upload_info = wp_upload_dir();
-  $upload_dir = $upload_info['basedir'];
+  	$upload_info = wp_upload_dir();
+  	$upload_dir = $upload_info['basedir'];
 
-  $flyfile = trailingslashit($upload_dir).$pathflyfilename;
-  $retinafile = trailingslashit($upload_dir).$pathretinaflyfilename;
-  if(empty($image_meta['sizes']) ){ $image_meta['sizes'] = array();}
+  	$flyfile = trailingslashit($upload_dir).$pathflyfilename;
+  	$retinafile = trailingslashit($upload_dir).$pathretinaflyfilename;
+  	if(empty($image_meta['sizes']) ){ 
+  		$image_meta['sizes'] = array();
+  	}
     if (file_exists($flyfile)) {
-      $kt_add_imagesize = array(
-        'kt_on_fly' => array( 
-          'file'=> $flyfilename,
-          'width' => $width,
-          'height' => $height,
-          'mime-type' => $image_meta['sizes']['thumbnail']['mime-type'] 
-          )
-      );
-      $image_meta['sizes'] = array_merge($image_meta['sizes'], $kt_add_imagesize);
+      	$kt_add_imagesize = array(
+        	'kt_on_fly' => array( 
+          	'file'=> $flyfilename,
+          	'width' => $width,
+          	'height' => $height,
+          	'mime-type' => isset($image_meta['sizes']['thumbnail']) ? $image_meta['sizes']['thumbnail']['mime-type'] : '', 
+          	)
+      	);
+      	$image_meta['sizes'] = array_merge($image_meta['sizes'], $kt_add_imagesize);
     }
     if (file_exists($retinafile)) {
-      $size = getimagesize( $retinafile );
-      if(($size[0] == 2 * $width) && ($size[1] == 2 * $height) ) {
         $kt_add_imagesize_retina = array(
-        'kt_on_fly_retina' => array( 
-          'file'=> $retinaflyfilename,
-          'width' => 2 * $width,
-          'height' => 2 * $height,
-          'mime-type' => $image_meta['sizes']['thumbnail']['mime-type'] 
-          )
+        	'kt_on_fly_retina' => array( 
+          	'file'=> $retinaflyfilename,
+          	'width' => 2 * $width,
+          	'height' => 2 * $height,
+          	'mime-type' => isset($image_meta['sizes']['thumbnail']) ? $image_meta['sizes']['thumbnail']['mime-type'] : '',
+          	)
         );
         $image_meta['sizes'] = array_merge($image_meta['sizes'], $kt_add_imagesize_retina);
-      }
     }
     if(function_exists ( 'wp_calculate_image_srcset') ){
       $output = wp_calculate_image_srcset(array( $width, $height), $url, $image_meta, $id);
@@ -212,6 +202,8 @@ function virtue_content($limit) {
       $content = str_replace(']]>', ']]&gt;', $content);
       return $content;
     }
+
+
 
 /* === Ambrosite Next/Previous Post Link Plus ===
 Author: ambrosite
@@ -584,110 +576,5 @@ function kadence_adjacent_post_link_plus($args = '', $format = '%link &raquo;', 
 
   return true;
 }
-if (class_exists('SitePress')) {
-global $sitepress;
-add_filter('get_previous_post_plus_join', array($sitepress,'get_adjacent_post_join'));
-add_filter('get_next_post_plus_join', array($sitepress,'get_adjacent_post_join'));
-add_filter('get_previous_post_plus_where', array($sitepress,'get_adjacent_post_where'));
-add_filter('get_next_post_plus_where', array($sitepress,'get_adjacent_post_where'));
-}
 
-//User Addon
-add_action( 'show_user_profile', 'kadence_show_extra_profile_fields' );
-add_action( 'edit_user_profile', 'kadence_show_extra_profile_fields' );
-
-function kadence_show_extra_profile_fields( $user ) { ?>
-
-<h3>Extra profile information</h3>
-
-<table class="form-table">
-  <tr>
-    <th><label for="twitter"><?php _e('Occupation', 'virtue');?></label></th>
-    <td>
-      <input type="text" name="occupation" id="occupation" value="<?php echo esc_attr( get_the_author_meta( 'occupation', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Occupation.', 'virtue');?></span>
-    </td>
-  </tr>
-  <tr>
-    <th><label for="twitter">Twitter</label></th>
-    <td>
-      <input type="text" name="twitter" id="twitter" value="<?php echo esc_attr( get_the_author_meta( 'twitter', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Twitter username.', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="facebook">Facebook</label></th>
-    <td>
-      <input type="text" name="facebook" id="facebook" value="<?php echo esc_attr( get_the_author_meta( 'facebook', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Facebook url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="google">Google Plus</label></th>
-    <td>
-      <input type="text" name="google" id="google" value="<?php echo esc_attr( get_the_author_meta( 'google', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Google Plus url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-   <tr>
-    <th><label for="youtube">YouTube</label></th>
-    <td>
-      <input type="text" name="youtube" id="youtube" value="<?php echo esc_attr( get_the_author_meta( 'youtube', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your YouTube url. (be sure to include https://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="flickr">Flickr</label></th>
-    <td>
-      <input type="text" name="flickr" id="flickr" value="<?php echo esc_attr( get_the_author_meta( 'flickr', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Flickr url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="linkedin">Linkedin</label></th>
-    <td>
-      <input type="text" name="linkedin" id="linkedin" value="<?php echo esc_attr( get_the_author_meta( 'linkedin', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Linkedin url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="dribbble">Dribbble</label></th>
-    <td>
-      <input type="text" name="dribbble" id="dribbble" value="<?php echo esc_attr( get_the_author_meta( 'dribbble', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Dribbble url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-    <tr>
-    <th><label for="pinterest">Pinterest</label></th>
-    <td>
-      <input type="text" name="pinterest" id="pinterest" value="<?php echo esc_attr( get_the_author_meta( 'pinterest', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Pinterest url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-  <tr>
-    <th><label for="instagram">Instagram</label></th>
-    <td>
-      <input type="text" name="instagram" id="instagram" value="<?php echo esc_attr( get_the_author_meta( 'instagram', $user->ID ) ); ?>" class="regular-text" /><br />
-      <span class="description"><?php _e('Please enter your Instagram url. (be sure to include http://)', 'virtue'); ?></span>
-    </td>
-  </tr>
-</table>
-<?php }
-add_action( 'personal_options_update', 'kadence_save_extra_profile_fields' );
-add_action( 'edit_user_profile_update', 'kadence_save_extra_profile_fields' );
-
-function kadence_save_extra_profile_fields( $user_id ) {
-    if ( !current_user_can( 'edit_user', $user_id ) )
-        return false;
-  update_user_meta( $user_id, 'occupation', $_POST['occupation'] );
-    update_user_meta( $user_id, 'twitter', $_POST['twitter'] );
-  update_user_meta( $user_id, 'facebook', $_POST['facebook'] );
-  update_user_meta( $user_id, 'google', $_POST['google'] );
-  update_user_meta( $user_id, 'youtube', $_POST['youtube'] );
-  update_user_meta( $user_id, 'flickr', $_POST['flickr'] );
-  update_user_meta( $user_id, 'linkedin', $_POST['linkedin'] );
-  update_user_meta( $user_id, 'dribbble', $_POST['dribbble'] );
-  update_user_meta( $user_id, 'pinterest', $_POST['pinterest'] );
-  update_user_meta( $user_id, 'instagram', $_POST['instagram'] );
-}
 

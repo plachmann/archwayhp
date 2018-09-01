@@ -11,7 +11,6 @@ jQuery(document).ready(function ($) {
 		$vform.on( 'reset_data', function() {
 			$vform.find( '.single_variation_wrap_kad' ).find('.quantity').hide();
 			$vform.find( '.single_variation .price').hide();
-			//$vform.find( '.single_variation_wrap' ).css("height", "auto");
 		} );
 
 		$vform.on('woocommerce_variation_has_changed', function() {

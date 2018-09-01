@@ -51,7 +51,7 @@ $acx_installation_url = "";
     </div> <!-- acx_csma_es_acx_content_area -->
     
     <div class="acx_csma_es_footer_content_cvr">
-    <div class="acx_csma_es_wp_footer_area_desc"><?php _e("Its our pleasure to thank you for using our plugin and being with us. We always do our best to help you on your needs. If you like to hide this menu, you can do so at ","coming-soon-maintenance-mode-from-acurax");?><a href="admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Misc"><?php _e("Misc","coming-soon-maintenance-mode-from-acurax");?></a><?php _e(" page which is under our plugin options.","coming-soon-maintenance-mode-from-acurax");?></div> <!--acx_csma_es_wp_footer_area_desc -->
+    <div class="acx_csma_es_wp_footer_area_desc"><?php _e("Its our pleasure to thank you for using our plugin and being with us. We always do our best to help you on your needs. If you like to hide this menu, you can do so at ","coming-soon-maintenance-mode-from-acurax");?><a href="<?php echo wp_nonce_url(admin_url('admin.php?page=Acurax-Coming-Soon-Maintenance-Mode-Misc'));?>"><?php _e("Misc","coming-soon-maintenance-mode-from-acurax");?></a><?php _e(" page which is under our plugin options.","coming-soon-maintenance-mode-from-acurax");?></div> <!--acx_csma_es_wp_footer_area_desc -->
     </div> <!-- acx_csma_es_footer_content_cvr -->
     
     </div> <!-- acx_csma_es_middle_section -->

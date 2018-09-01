@@ -306,7 +306,7 @@ function spacious_darkcolor($hex, $steps) {
 
 /****************************************************************************************/
 
-add_action('wp_head', 'spacious_custom_css');
+add_action('wp_head', 'spacious_custom_css', 100);
 /**
  * Hooks the Custom Internal CSS to head section
  */
@@ -490,9 +490,9 @@ if ( ! function_exists( 'spacious_footer_copyright' ) ) :
 function spacious_footer_copyright() {
 	$site_link = '<a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'name', 'display' ) ) . '" ><span>' . get_bloginfo( 'name', 'display' ) . '</span></a>';
 
-	$wp_link = '<a href="'.esc_url( 'http://wordpress.org' ).'" target="_blank" title="' . esc_attr__( 'WordPress', 'spacious' ) . '"><span>' . __( 'WordPress', 'spacious' ) . '</span></a>';
+	$wp_link = '<a href="'.esc_url( 'https://wordpress.org' ).'" target="_blank" title="' . esc_attr__( 'WordPress', 'spacious' ) . '"><span>' . __( 'WordPress', 'spacious' ) . '</span></a>';
 
-	$tg_link =  '<a href="'.esc_url( 'http://themegrill.com/themes/spacious' ).'" target="_blank" title="'.esc_attr__( 'ThemeGrill', 'spacious' ).'" rel="designer"><span>'.__( 'ThemeGrill', 'spacious') .'</span></a>';
+	$tg_link =  '<a href="'.esc_url( 'https://themegrill.com/themes/spacious' ).'" target="_blank" title="'.esc_attr__( 'ThemeGrill', 'spacious' ).'" rel="designer"><span>'.__( 'ThemeGrill', 'spacious') .'</span></a>';
 
 	$default_footer_value = sprintf( __( 'Copyright &copy; %1$s %2$s.', 'spacious' ), date( 'Y' ), $site_link ).' '.sprintf( __( 'Powered by %s.', 'spacious' ), $wp_link ).' '.sprintf( __( 'Theme: %1$s by %2$s.', 'spacious' ), 'Spacious', $tg_link );
 
@@ -618,14 +618,20 @@ add_action('woocommerce_before_main_content', 'spacious_wrapper_start', 10);
 add_action('woocommerce_after_main_content', 'spacious_wrapper_end', 10);
 
 function spacious_wrapper_start() {
-  echo '<div id="primary">';
+	echo '<div id="primary">';
 }
 
 function spacious_wrapper_end() {
-  echo '</div>';
+	echo '</div>';
 }
 
-add_theme_support( 'woocommerce' );
+function spacious_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
+}
+add_action( 'after_setup_theme', 'spacious_woocommerce_support' );
 
 /**
  * Function to transfer the favicon added in Customizer Options of theme to Site Icon in Site Identity section

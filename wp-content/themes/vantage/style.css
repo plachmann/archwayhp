@@ -4,7 +4,7 @@ Author: SiteOrigin
 Author URI: https://siteorigin.com/
 Theme URI: https://siteorigin.com/theme/vantage/
 Description: Vantage is a flexible multipurpose theme. Its strength lies in its tight integration with some powerful plugins like Page Builder for responsive page layouts, Meta Slider for big beautiful sliders and WooCommerce to help you sell online. Vantage is fully responsive and retina ready. Use it to start a business site, portfolio or online store. We offer free and premium support on our support <a href="http://siteorigin.com/thread/">forums</a> (http://siteorigin.com/thread/).
-Version: 1.5.8
+Version: 1.6.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: vantage
@@ -624,7 +624,7 @@ body {
   font-weight: 100;
   padding: 7px 15px;
 }
-.layout-boxed #masthead.masthead-logo-in-menu img.logo {
+.layout-boxed #masthead.masthead-logo-in-menu .logo {
   margin-left: 25px;
 }
 body.ie-8 #masthead .hgroup #header-sidebar,
@@ -1317,13 +1317,27 @@ article.page .author-box .box-content {
 }
 article.post .author-box .box-content .box-title,
 article.page .author-box .box-content .box-title {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+article.post .author-box .box-content .box-title h3,
+article.page .author-box .box-content .box-title h3 {
   color: #3b3b3b;
   font-size: 1.25em;
   line-height: 1.1em;
   font-weight: 500;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #e0e0e0;
+  margin: .6em 0 0;
+}
+article.post .author-box .box-content .author-posts a,
+article.page .author-box .box-content .author-posts a {
+  color: #777;
+  font-size: .9em;
+  text-decoration: none;
+}
+article.post .author-box .box-content .author-posts a:hover,
+article.page .author-box .box-content .author-posts a:hover {
+  color: #248cc8;
 }
 article.post .author-box .box-content .box-description,
 article.page .author-box .box-content .box-description {
@@ -3549,4 +3563,9 @@ span.jwcontrols span button {
   width: auto;
   z-index: 100000;
   /* Above WP toolbar. */
+}
+/* Prevent iOS Safari from overriding the colors for phone numbers */
+a[href^="tel"] {
+  color: inherit;
+  text-decoration: none;
 }

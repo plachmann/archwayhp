@@ -7,8 +7,9 @@
  * @license GPL 2.0
  */
 
-define('SITEORIGIN_THEME_VERSION', '1.5.8');
-define('SITEORIGIN_THEME_JS_PREFIX', '.min');
+define( 'SITEORIGIN_THEME_VERSION', '1.6.3' );
+define( 'SITEORIGIN_THEME_JS_PREFIX', '.min' );
+define( 'SITEORIGIN_THEME_CSS_PREFIX', '.min' );
 
 // Load the new settings framework
 include get_template_directory() . '/inc/settings/settings.php';
@@ -81,10 +82,13 @@ function vantage_setup() {
 		'video',
 	) );	
 
-	// We support WooCommerce
-	add_theme_support('woocommerce');
+	// Add support for WooCommerce
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
 
-	set_post_thumbnail_size(720, 380, true );
+	set_post_thumbnail_size( 720, 380, true );
 	add_image_size( 'vantage-thumbnail-no-sidebar', 1080, 380, true );
 	add_image_size( 'vantage-slide', 960, 480, true );
 	add_image_size( 'vantage-carousel', 272, 182, true );
@@ -145,7 +149,7 @@ function vantage_setup() {
 	) );
 
 	$mega_menu_active = function_exists( 'ubermenu' ) || ( function_exists( 'max_mega_menu_is_enabled' ) && max_mega_menu_is_enabled( 'primary' ) );
-	if( siteorigin_setting( 'navigation_responsive_menu' ) && !$mega_menu_active ) {
+	if( siteorigin_setting( 'navigation_responsive_menu' ) && siteorigin_setting( 'layout_responsive' ) && !$mega_menu_active ) {
 		include get_template_directory() . '/inc/mobilenav/mobilenav.php';
 	}
 
@@ -454,7 +458,7 @@ function vantage_render_slider(){
 
 
 	if($slider == 'demo') get_template_part('slider/demo');
-	elseif( substr($slider, 0, 5) == 'meta:' ) {
+	elseif(substr($slider, 0, 5) == 'meta:' && defined('METASLIDER_VERSION') ) {
 		list($null, $slider_id) = explode(':', $slider);
 
 		echo do_shortcode( "[metaslider id=" . intval($slider_id) . "]" );

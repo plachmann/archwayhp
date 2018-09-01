@@ -907,3 +907,24 @@ cursor:pointer;
 #acx_csma_display_variable_content #acx_disp_edit_link a, #acx_csma_display_variable_content #acx_disp_reset_link a {
     cursor: pointer;
 }
+.acx_csma_download_log_cvr {
+	width: 30%;
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.acx_csma_download_log_cvr .acx_csma_download_log {
+	color: #333;
+	text-align: center;
+	float: right;
+}
+#acx_csma_gdpr_status {
+	margin-top: 4px;
+}
+#wp-acx_csma_privacy_policy_desc-wrap {
+	float: left;
+	width: 100%;
+}
+#qt_acx_csma_privacy_policy_desc_toolbar input {
+	width: auto;
+}

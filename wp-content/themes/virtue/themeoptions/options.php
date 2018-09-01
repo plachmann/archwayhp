@@ -968,6 +968,18 @@ Redux::setSection( $opt_name, array(
             'desc' => __('Product Page Settings', 'virtue'),
             ),
         array(
+            'id'=>'product_gallery_slider',
+            'type' => 'switch', 
+            'title' => __('Enable woocommerce slider for product gallery? (must be woocommerce 3.0+)', 'virtue'),
+            "default" => 0,
+        ),
+        array(
+            'id'=>'product_gallery_zoom',
+            'type' => 'switch', 
+            'title' => __('Enable woocommerce hover zoom for product gallery? (must be woocommerce 3.0+)', 'virtue'),
+            "default" => 0,
+        ), 
+        array(
             'id'=>'product_tabs',
             'type' => 'switch', 
             'title' => __('Display product tabs?', 'virtue'),
@@ -1849,9 +1861,9 @@ Redux::setSection( $opt_name, array(
             'id'=>'virtue_custom_favicon',
             'type' => 'media', 
             'customizer' => true,
-            'preview'=> true,
+            'preview'=> false,
             'title' => __('Custom Favicon, *Note depreciated. Use WordPress site icon in customizer.', 'virtue'),
-            'subtitle' => __('Upload a 16px x 16px png/gif/ico image that will represent your website favicon.', 'virtue'),
+            'subtitle' => __('Go to apperance > customize > site identity and set your favicon there.', 'virtue'),
             ),
         array(
             'id'=>'contact_email',

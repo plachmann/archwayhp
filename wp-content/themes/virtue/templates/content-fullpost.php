@@ -59,7 +59,7 @@
                     <?php if($image) : ?>
                       <div class="imghoverclass">
                         <a href="<?php echo esc_url($img_url); ?>" data-rel="lightbox" class="lightboxhover">
-                          <img src="<?php echo esc_url($image); ?>" alt="<?php the_title(); ?>" />
+                          <img src="<?php echo esc_url($image); ?>" alt="<?php the_title_attribute(); ?>" />
                         </a>
                       </div>
                     <?php endif; ?>

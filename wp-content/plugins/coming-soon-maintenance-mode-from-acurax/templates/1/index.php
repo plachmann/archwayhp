@@ -57,6 +57,10 @@ if($acx_csma_meta_keywords!="")
 {
 		background-color:<?php echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_timer_input_bg_color1']; ?>;
 }
+.acx_csma_gdpr_notice .acx_csma_info_lb:hover
+{
+	color:<?php echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_gdpr_hovercolor1']; ?> !important;
+}
 </style>
 <link href="<?php echo plugins_url('style.css', __FILE__); ?>" rel="stylesheet" type="text/css" />
 <link rel="icon" href="<?php echo esc_url($acx_csma_favicon); ?>"  type="image/png">
@@ -93,6 +97,10 @@ else
 {
 	$new_class="";
 }
+$acx_csma_form_text = get_option('acx_csma_form_text');
+$acx_csma_gdpr_status = get_option('acx_csma_gdpr_status');
+$acx_csma_privacy_policy_title = get_option('acx_csma_privacy_policy_title');
+$acx_csma_privacy_policy_desc = get_option('acx_csma_privacy_policy_desc');
 ?>	<div class="wrapper" > 
 		<div class="canvas960 <?php echo $new_class; ?>"> 
 			<div id="header">
@@ -270,11 +278,75 @@ else
 					<input type="text" id="acx_csma_name_hidden" name="acx_csma_name_hidden" value="" placeholder="<?php echo $acx_s_name_singular; ?>">
 					<input type="hidden" id="acx_csma_email" name="email" placeholder="<?php echo $acx_s_email_singular; ?>" >
 					<br/> 
-					<input type="button" id="acx_csma_submit" onclick="acx_csma_validate_email();" value="<?php echo $acx_next_singular; ?>" class="submit" >
+					<div class="acx_csma_privacy_cvr" style="display:none;">
+					<?php 
+					if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+					{
+						?>
+						<span class="acx_csma_gdpr_notice" style='color:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_gdprcolor1']; ?>;'>
+						<input type="checkbox" name="acx_csma_gdpr_accept" id="acx_csma_gdpr_accept" value="yes">
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							<a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_gdprcolor1']; ?>;'>
+							<?php
+						}
+						?>
+						
+						<?php echo $acx_csma_form_text;?>
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							</a>
+							<?php
+							
+						}
+						?>
+						</span>
+						<?php
+					}
+					?>
+					</div>
+					<br>
+					<input type="button" id="acx_csma_submit" onclick="acx_csma_validate_email();" value="<?php echo $acx_next_singular; ?>" class="submit">
 					<?php }
 					else if($acx_csma_show_subscription_name == 0){ ?>
 					<input type="text" id="acx_csma_email" name="email" placeholder="<?php echo $acx_s_email_singular; ?>" >
 					<br/> 
+					<div class="acx_csma_privacy_cvr" style="display:none;">
+					<?php 
+					if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+					{
+						?>
+						<span class="acx_csma_gdpr_notice">
+						<input type="checkbox" name="acx_csma_gdpr_accept" id="acx_csma_gdpr_accept" value="yes">
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							<a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php echo  $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_gdprcolor1'];?>;'>
+							<?php
+						}
+						?>
+						
+						<?php echo $acx_csma_form_text;?>
+						<?php
+						if($acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+						{
+							?>
+							</a>
+							<?php
+							
+						}
+						?>
+						</span>
+						<?php
+					}
+					?>
+					</div>
+					<br>
 					<input type="button" id="acx_csma_submit" onclick="acx_csma_validate_email();" value="<?php echo acx_csma_option_text_after_save_hook_fn($acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_subscribe_btn_text1']); ?>" class="submit" >
 					<?php					
 					}
@@ -283,7 +355,6 @@ else
 					</form>
 					<?php
 					}
-					
 					if($acx_csma_custom_html_bottom_sub1 != "")
 					{ ?>
 						<div class="acx_csma_content_div acx_csma_bottom acx_csma_bottom_1" id="acx_csma_top_1">
@@ -298,7 +369,19 @@ else
 				<?php $acx_csma_footer_text1 = $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_text1']; 
 				$acx_csma_footer_text1 = acx_csma_text_after_save_hook_fn($acx_csma_footer_text1);
 				?>
-				<div class="timer_head footer" style="background:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_bgcolor1']; ?>;color:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_text_color1']; ?>"><?php  echo $acx_csma_footer_text1; ?></div><!-- timer_head  -->
+				<div class="timer_head footer" style="background:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_bgcolor1']; ?>;color:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_text_color1']; ?>"><?php  echo $acx_csma_footer_text1
+				; ?>
+				<?php
+				if($acx_csma_gdpr_status == "yes" && $acx_csma_privacy_policy_title != "" && $acx_csma_privacy_policy_desc != "")
+				{
+					?>
+					
+					| <a class='acx_csma_info_lb' lb_title='<?php echo $acx_csma_privacy_policy_title ;?>' lb_content='<?php echo $acx_csma_privacy_policy_desc ;?>' style='color:<?php  echo $acx_csma_appearence_array_1[$acx_csma_template_id]['acx_csma_footer_text_color1']; ?>;'><?php echo $acx_csma_privacy_policy_title ;?></a>
+					<?php
+				}
+						
+				?>
+				</div><!-- timer_head  -->
 			</div><!-- inline_block -->
 		</div><!-- canvas960 -->
 	</div><!-- wrapper -->
@@ -333,11 +416,20 @@ if($acx_csma_show_subscription == 1)
 	$acx_next_singular=$acx_subs_next_arr['singular'];
 ?>
 var acx_csma_form_status=1;
+<?php 
+	if($acx_csma_show_subscription_name == 0 && $acx_csma_gdpr_status == "yes")
+	{?>
+jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+jQuery(".acx_csma_privacy_cvr").show();	
+<?php
+	}
+	?>
 function acx_csma_validate_email()
 {
 	<?php 
 	if($acx_csma_show_subscription_name == 0)
 	{?>
+	
 	
 	var acx_csma_email = document.getElementById('acx_csma_email').value;
 	var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -352,18 +444,32 @@ function acx_csma_validate_email()
 		jQuery("#acx_csma_invalid").show();
 		jQuery("#acx_csma_email").hide();
 		jQuery("#acx_csma_submit").hide();
+		jQuery(".acx_csma_privacy_cvr").hide();
 		setTimeout(function()
 			{ 
 				jQuery("#acx_csma_invalid").hide();
 				jQuery("#acx_csma_email").show();
-				jQuery("#acx_csma_submit").show();				
+				jQuery("#acx_csma_submit").show();	
+				jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+				jQuery(".acx_csma_privacy_cvr").show();			
 			}, 3000);
 		
 		
 		return false;
 	}
-		else 
+	else 
 	{
+		<?php 
+			if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+			{
+				?>
+				if(jQuery("#acx_csma_gdpr_accept:checked").val() !== "yes")
+				{
+					return false;
+				}
+			<?php
+			}
+			?>
 	var acx_load="<div id='acx_csma_loading'><div class='load_1'></div></div>";
 	jQuery('body').append(acx_load);
 	
@@ -380,11 +486,14 @@ function acx_csma_validate_email()
 				jQuery("#acx_csma_success").show();
 				jQuery("#acx_csma_email").hide();
 				jQuery("#acx_csma_submit").hide();
+				jQuery(".acx_csma_privacy_cvr").hide();
 				setTimeout(function()
 				{ 
 					jQuery("#acx_csma_success").hide(); 
 					jQuery("#acx_csma_email").show();
 					jQuery("#acx_csma_submit").show();
+					jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+					jQuery(".acx_csma_privacy_cvr").show();
 				}, 3000);
 			}  
 			else{
@@ -392,6 +501,7 @@ function acx_csma_validate_email()
 				jQuery("#acx_csma_email").hide();
 				jQuery("#acx_csma_submit").hide();
 				jQuery("#acx_csma_error").show();
+				jQuery(".acx_csma_privacy_cvr").hide();
 				jQuery("#acx_csma_error").html("<?php echo $acx_email_singular; ?>");
 				setTimeout(function()
 				{ 
@@ -399,6 +509,8 @@ function acx_csma_validate_email()
 					jQuery("#acx_csma_error").hide(); 
 					jQuery("#acx_csma_email").show();
 					jQuery("#acx_csma_submit").show();
+					jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+					jQuery(".acx_csma_privacy_cvr").show();
 				}, 3000);
 			
 			}  
@@ -412,20 +524,23 @@ function acx_csma_validate_email()
 	var acx_csma_name_hidden=document.getElementById('acx_csma_name_hidden').value;
 	if(acx_csma_form_status== 1)
 	{
-	if(acx_csma_name_hidden=="")
-	{
-		alert('<?php echo $acx_name_val_singular; ?>');
-		acx_csma_form_status=1;
-		return false;
-	}
-	else{
-		document.getElementById('acx_csma_name_hidden').type = 'hidden';
-		document.getElementById('acx_csma_email').type = 'email';
-		jQuery("#acx_csma_email").show();
-		document.getElementById('acx_csma_submit').value="<?php echo $acx_csma_subscribe_btn_text1; ?>";
-		acx_csma_form_status=2;
-		return false;
-	}
+		if(acx_csma_name_hidden=="")
+		{
+			alert('<?php echo $acx_name_val_singular; ?>');
+			acx_csma_form_status=1;
+			return false;
+		}
+		else{
+			document.getElementById('acx_csma_name_hidden').type = 'hidden';
+			document.getElementById('acx_csma_email').type = 'email';
+			jQuery("#acx_csma_email").show();
+			document.getElementById('acx_csma_submit').value="<?php echo $acx_csma_subscribe_btn_text1; ?>";
+			
+			jQuery('#acx_csma_gdpr_accept').attr('checked', false); 
+			jQuery(".acx_csma_privacy_cvr").show();	
+			acx_csma_form_status=2;
+			return false;
+		}
 	}
 	else if(acx_csma_form_status==2)
 	{
@@ -443,19 +558,34 @@ function acx_csma_validate_email()
 			jQuery("#acx_csma_email").hide();
 			jQuery("#acx_csma_submit").hide();
 			jQuery("#acx_csma_invalid").show();
+			jQuery(".acx_csma_privacy_cvr").hide();	
 			setTimeout(function()
 				{ 
 					jQuery("#acx_csma_invalid").hide(); 
 					document.getElementById('acx_csma_name_hidden').type = 'text';
 					document.getElementById('acx_csma_submit').value="<?php echo $acx_next_singular; ?>";
 					jQuery("#acx_csma_submit").show();
+					jQuery(".acx_csma_privacy_cvr").hide();	
 					acx_csma_form_status=1;
 			
 				}, 3000);
 			return false;
-		}
+		} 
 		else 
 		{
+			
+			<?php 
+			if($acx_csma_gdpr_status == "yes" && $acx_csma_form_text != "")
+			{
+				?>
+				if(jQuery("#acx_csma_gdpr_accept:checked").val() !== "yes")
+				{
+					return false;
+				}
+			<?php
+			}
+			?>
+			
 			var acx_load="<div id='acx_csma_loading'><div class='load_1'></div></div>";
 			jQuery('body').append(acx_load);
 			
@@ -472,7 +602,7 @@ function acx_csma_validate_email()
 					document.getElementById('acx_csma_name_hidden').value="";
 					jQuery("#acx_csma_email").hide();
 					jQuery("#acx_csma_submit").hide();
-					
+					jQuery(".acx_csma_privacy_cvr").hide();	
 					jQuery("#acx_csma_success").show();
 					setTimeout(function()
 					{ 
@@ -491,6 +621,8 @@ function acx_csma_validate_email()
 					jQuery("#acx_csma_submit").hide();
 					jQuery("#acx_csma_error").show();
 					jQuery("#acx_csma_error").html("<?php echo $acx_email_singular; ?>");
+					jQuery('#acx_csma_gdpr_accept').attr('checked', false);
+					jQuery(".acx_csma_privacy_cvr").show();	
 					setTimeout(function()
 					{ 
 						jQuery("#acx_csma_error").html(''); 
@@ -498,6 +630,8 @@ function acx_csma_validate_email()
 						document.getElementById('acx_csma_name_hidden').type = 'text';
 						document.getElementById('acx_csma_submit').value="<?php echo $acx_next_singular; ?>";
 						jQuery("#acx_csma_submit").show();
+						
+						jQuery(".acx_csma_privacy_cvr").hide();	
 						acx_csma_form_status=1;
 				
 					}, 3000);
@@ -658,6 +792,21 @@ function updateCounter()
 	} 
 }	
 ?>
+jQuery( ".acx_csma_info_lb" ).click(function() {
+	var lb_title = jQuery(this).attr('lb_title');
+	var lb_content = jQuery(this).attr('lb_content');
+	var html= '<div id="acx_csma_c_icon_p_info_lb_h" style="display:none;"><div class="acx_csma_c_icon_p_info_c"><span class="acx_csma_c_icon_p_info_close" onclick="acx_csma_remove_info()"></span><h4>'+lb_title+'</h4><div class="acx_csma_c_icon_p_info_content">'+lb_content+'</div></div></div> <!-- acx_csma_c_icon_p_info_lb_h -->';
+	jQuery( "body" ).append(html)
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).fadeIn();
+});
+
+function acx_csma_remove_info()
+{
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).fadeOut()
+	jQuery( "#acx_csma_c_icon_p_info_lb_h" ).remove();
+	var lb_title = "";
+	var lb_content = "";
+};
 </script>
 <?php do_action('acx_csma_bottom_inside_body_tag',$acx_csma_template_id); ?>
 </body>

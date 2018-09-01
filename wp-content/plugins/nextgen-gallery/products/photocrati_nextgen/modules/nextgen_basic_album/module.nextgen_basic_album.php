@@ -25,7 +25,7 @@ class M_NextGen_Basic_Album extends C_Base_Module
             'photocrati-nextgen_basic_album',
             'NextGEN Basic Album',
             "Provides support for NextGEN's Basic Album",
-            '0.17',
+            '3.0.0',
             'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
             'Imagely',
             'https://www.imagely.com'
@@ -60,7 +60,7 @@ class M_NextGen_Basic_Album extends C_Base_Module
 			'A_NextGen_Basic_Album'
 		);
 
-        if (apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id))
+        if (!is_admin() && apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id))
         {
             // Add a controller for displaying albums on the front-end
             $this->get_registry()->add_adapter(
@@ -115,7 +115,7 @@ class M_NextGen_Basic_Album extends C_Base_Module
 
 	function _register_hooks()
 	{
-        if (apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id)
+        if (!is_admin() && apply_filters('ngg_load_frontend_logic', TRUE, $this->module_id)
         && (!defined('NGG_DISABLE_LEGACY_SHORTCODES') || !NGG_DISABLE_LEGACY_SHORTCODES))
         {
             C_NextGen_Shortcode_Manager::add('album', array(&$this, 'ngglegacy_shortcode'));

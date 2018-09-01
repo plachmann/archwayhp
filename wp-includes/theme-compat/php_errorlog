@@ -1,0 +1,1 @@
+[06-Jun-2018 04:16:22 CST6CDT] PHP Fatal error:  Call to undefined function post_class() in /home/archwayh/public_html/wp-includes/theme-compat/embed-content.php on line 13

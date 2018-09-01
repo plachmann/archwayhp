@@ -12,8 +12,16 @@ function woocommerce_support() {
 /*-----------------------------------------------------------------------------------*/
 
 if (class_exists('woocommerce')) {
-
-  add_filter( 'woocommerce_enqueue_styles', '__return_false' );
+	if ( version_compare( WC_VERSION, '3.0', '>' ) ) {
+		$virtue = virtue_get_options();
+		if(isset($virtue['product_gallery_zoom']) && 1 == $virtue['product_gallery_zoom']) {
+			add_theme_support( 'wc-product-gallery-zoom' );
+		}
+		if(isset($virtue['product_gallery_slider']) && 1 == $virtue['product_gallery_slider']) {
+			add_theme_support( 'wc-product-gallery-slider' );
+		}
+	}
+  	add_filter( 'woocommerce_enqueue_styles', '__return_false' );
   
     // Disable WooCommerce Lightbox
     if (get_option( 'woocommerce_enable_lightbox' ) == true ) {
@@ -75,7 +83,7 @@ function kadence_woo_related_products_limit() {
     'ignore_sticky_posts'   => 1,
     //'orderby'               => $orderby,
     'post__in'              => $related,
-    'post__not_in'          => array($product->id)
+    'post__not_in'          => array($product->get_id())
   );
   return $args;
 }
@@ -112,26 +120,34 @@ if ( ! function_exists( 'kadence_wooframework_related_products' ) ) {
     }
   }
 }
-
-add_filter('add_to_cart_fragments', 'kadence_woocommerce_header_add_to_cart_fragment');
-function kadence_woocommerce_header_add_to_cart_fragment( $fragments ) {
-    global $woocommerce;
-    ob_start(); ?>
-    <a class="cart-contents" href="<?php echo esc_url($woocommerce->cart->get_cart_url()); ?>" title="<?php esc_attr_e('View your shopping cart', 'virtue'); ?>">
-        <i class="icon-shopping-cart" style="padding-right:5px;"></i>
-        <?php _e('Your Cart', 'virtue');?>
-        <span class="kad-cart-dash">-</span>
-        <?php if ( WC()->cart->tax_display_cart == 'incl' ) {
-              echo WC()->cart->get_cart_subtotal(); 
-            } else {
-              echo WC()->cart->get_cart_total();
-            }
-        ?>
-    </a>
-    <?php
-    $fragments['a.cart-contents'] = ob_get_clean();
-    return $fragments;
+function virtue_woocommerce_cart_fragments_support() {
+	if (class_exists('woocommerce')) {
+		if ( version_compare( WC_VERSION, '3.0', '>' ) ) {
+	    	add_filter('woocommerce_add_to_cart_fragments', 'virtue_woocommerce_header_add_to_cart_fragment');
+	    } else {
+	    	add_filter('add_to_cart_fragments', 'virtue_woocommerce_header_add_to_cart_fragment');
+	    }
+		function virtue_woocommerce_header_add_to_cart_fragment( $fragments ) {
+		    global $woocommerce;
+		    ob_start(); ?>
+		    <a class="cart-contents" href="<?php echo esc_url($woocommerce->cart->get_cart_url()); ?>" title="<?php esc_attr_e('View your shopping cart', 'virtue'); ?>">
+		        <i class="icon-shopping-cart" style="padding-right:5px;"></i>
+		        <?php _e('Your Cart', 'virtue');?>
+		        <span class="kad-cart-dash">-</span>
+		        <?php if ( WC()->cart->tax_display_cart == 'incl' ) {
+		              echo WC()->cart->get_cart_subtotal(); 
+		            } else {
+		              echo WC()->cart->get_cart_total();
+		            }
+		        ?>
+		    </a>
+		    <?php
+		    $fragments['a.cart-contents'] = ob_get_clean();
+		    return $fragments;
+		}
+	}
 }
+add_action( 'after_setup_theme', 'virtue_woocommerce_cart_fragments_support' );
 
 
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
@@ -157,8 +173,8 @@ if ( ! function_exists( 'kt_woocommerce_single_variation_add_to_cart_button' ) )
     <div class="variations_button">
       <?php woocommerce_quantity_input( array( 'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : 1 ) ); ?>
       <button type="submit" class="kad_add_to_cart headerfont kad-btn kad-btn-primary single_add_to_cart_button"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-      <input type="hidden" name="add-to-cart" value="<?php echo absint( $product->id ); ?>" />
-      <input type="hidden" name="product_id" value="<?php echo absint( $product->id ); ?>" />
+      <input type="hidden" name="add-to-cart" value="<?php echo absint( $product->get_id() ); ?>" />
+      <input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
       <input type="hidden" name="variation_id" class="variation_id" value="" />
     </div>
     <?php
